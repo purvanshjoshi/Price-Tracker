@@ -81,7 +81,7 @@ graph TD
 ### Local Development Setup (Coming Soon)
 1. Clone the repository.
 2. Setup MySQL database with `price_history` schema.
-3. Build the Java Engine JAR file using Maven.
+3. Build the Java Engine JAR file using Maven inside the `backend` folder.
 4. Execute the Native Messaging Host registration script (creates a registry entry pointing Chrome to the Java executable).
 5. Load the `extension` folder in Developer Mode via `chrome://extensions/`.
 
