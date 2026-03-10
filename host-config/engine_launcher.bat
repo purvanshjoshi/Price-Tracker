@@ -10,5 +10,6 @@ FOR /D %%G IN ("D:\Tools\Java\jdk*") DO (
     SET JAVA_EXE="%%G\bin\java.exe"
 )
 
-:: Execute the built Java JAR
-%JAVA_EXE% -jar "d:\Price Tracker\backend\target\PriceTrackerEngine.jar"
+:: Execute the built Java JAR and Log it
+echo [Launcher] Started at %TIME% >> "d:\Price Tracker\host_test.log"
+%JAVA_EXE% -jar "d:\Price Tracker\backend\target\PriceTrackerEngine.jar" 2>> "d:\Price Tracker\host_error.log"
