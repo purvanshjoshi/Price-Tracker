@@ -4,23 +4,11 @@ Follow these exact steps to compile the Java Engine, set up your Database, and i
 
 ---
 
-## 1. Set Up the MySQL Database
-1. Open **MySQL Workbench** or your MySQL command line.
-2. Run the following SQL exactly as written:
-   ```sql
-   CREATE DATABASE IF NOT EXISTS price_tracker_db;
-   USE price_tracker_db;
-   
-   CREATE TABLE IF NOT EXISTS price_history (
-       id INT AUTO_INCREMENT PRIMARY KEY,
-       product_name VARCHAR(255) NOT NULL,
-       platform VARCHAR(50) NOT NULL,
-       price DECIMAL(10,2) NOT NULL,
-       url VARCHAR(500),
-       scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-   );
-   ```
-3. Ensure the username and password in `src/main/java/com/pricetracker/database/DatabaseManager.java` match your local MySQL credentials!
+## 1. Set Up the Database
+**Note: You don't need to install anything!** 
+The project has been converted to use **SQLite**. The database file (`price_history.db`) will be created automatically in the `backend/` folder the first time you run a search.
+
+No server, no username, and no password required. It just works!
 
 ---
 
