@@ -11,4 +11,4 @@ FOR /D %%G IN ("D:\Tools\Java\jdk*") DO (
 )
 
 :: Execute the built Java JAR
-%JAVA_EXE% -jar target/PriceTrackerEngine.jar
+%JAVA_EXE% -jar "d:\Price Tracker\backend\target\PriceTrackerEngine.jar"
