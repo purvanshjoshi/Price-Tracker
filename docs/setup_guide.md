@@ -43,13 +43,13 @@ Google Chrome needs permission to run your Java file. We do this by creating a q
 
 1. Open **Chrome** and go to `chrome://extensions/`.
 2. Turn on **Developer mode** (top right toggle).
-3. Click **Load unpacked** and select the `d:\Price Tracker\Extension` folder.
+3. Click **Load unpacked** and select the `d:\Price Tracker\extension` folder.
 4. **Important:** Note the 32-character Extension ID that Chrome gives it (e.g., `abcdefghijklmnopqrstuvwxyz123456`).
-5. Open `d:\Price Tracker\HostConfig\com.pricetracker.engine.json` and replace `<YOUR_EXTENSION_ID_HERE>` with your actual Extension ID. Save the file.
+5. Open `d:\Price Tracker\host-config\com.pricetracker.engine.json` and replace `<YOUR_EXTENSION_ID_HERE>` with your actual Extension ID. Save the file.
 6. Open an **Administrator Command Prompt**.
 7. Run this command to add the Registry Key (replace the path if you moved the project):
    ```cmd
-   REG ADD "HKCU\Software\Google\Chrome\NativeMessagingHosts\com.pricetracker.engine" /ve /t REG_SZ /d "d:\Price Tracker\HostConfig\com.pricetracker.engine.json" /f
+   REG ADD "HKCU\Software\Google\Chrome\NativeMessagingHosts\com.pricetracker.engine" /ve /t REG_SZ /d "d:\Price Tracker\host-config\com.pricetracker.engine.json" /f
    ```
 
 ---
