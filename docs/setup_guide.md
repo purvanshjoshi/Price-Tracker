@@ -27,7 +27,7 @@ Follow these exact steps to compile the Java Engine, set up your Database, and i
 ## 2. Compile the Java Engine
 We need to package your Java code and all the dependencies (Jsoup, MySQL driver, JSON) into a single executable `PriceTrackerEngine.jar`.
 
-1. Open a terminal or Command Prompt in the project folder (`d:\Price Tracker`).
+1. Open a terminal or Command Prompt in the backend folder (`d:\Price Tracker\backend`).
 2. Run the Maven packaging command:
    ```bash
    mvn clean package
