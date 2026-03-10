@@ -1,7 +1,7 @@
 {
     "name": "com.pricetracker.engine",
     "description": "Price Tracker Java Engine",
-    "path": "engine_launcher.bat",
+    "path": "d:\\Price Tracker\\host-config\\engine_launcher.bat",
     "type": "stdio",
     "allowed_origins": [
         "chrome-extension://fnlmcodbkjigjnldechpnccfgmbngaem/"
