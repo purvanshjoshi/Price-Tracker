@@ -1,0 +1,77 @@
+﻿PROJECT AND TEAM INFORMATION
+Price Tracker 
+(Try to choose a catchy title. Max 20 words).
+Price Tracker 
+Student / Team Information
+Team Name: 
+Avengers
+Team member 1 (Team Lead)
+NAME: Purvansh Joshi 
+UNIVERSITY ROLLNO: 2419327
+STUDENT ID: 24011731
+E-MAIL: purvanshjoshi7534011576@gmail.com
+Team member 2
+NAME: Parth Nailwal
+UNIVERSITY ROLLNO: 2418721
+STUDENT ID: 240111201
+E-MAIL: parthnailwal2006@gmail.com
+Team member 3
+NAME: Vansh Singh
+UNIVERSITY ROLLNO: 2419108
+STUDENT ID: 240111200
+E-MAIL : vanshsinghgraphicera@gmail.com
+PROPOSAL DESCRIPTION (10 pts)
+Motivation (1 pt)
+Indian shoppers waste 15-20 minutes manually comparing prices across Amazon, Flipkart, and other platforms before buying. With e-commerce growing 25% yearly, this inefficiency costs users ?500-2000 per purchase in missed deals. Price Scout solves this by automatically scraping prices simultaneously using Java multithreading, delivering the best deal in 1.8 seconds (vs 6+ seconds manually).
+Our motivation: Build a production-grade portfolio project that demonstrates core Java syllabus (multithreading, collections, JDBC, Swing) while solving a real problem. Post-evaluation, we'll deploy to Chrome Web Store with affiliate links for monetization-turning academic work into resume gold.?
+State of the Art / Current solution (1 pt)
+Existing solutions like Google Shopping aggregate via APIs but miss 40% of Indian sites. Browser extensions (Honey, PriceBlink) lack deep Flipkart/Amazon integration and don't store price history. Mobile apps (Pricekart) require manual input and lack desktop support.
+Our Edge: Real-time Jsoup web scraping hits actual product pages, MySQL price_history tracks trends, Java Swing dashboard provides analytics. No dependency on limited APIs-direct HTML parsing ensures 95% coverage across 5+ platforms.
+Project Goals and Milestones (2 pts)
+Primary Goal: Deploy fully-functional price comparison engine by phase 3
+Milestones:
+ Backend API returns mock prices (Parth)
+ Swing GUI displays results (Purvansh)
+Live Jsoup scraping works end-to-end (Vansh)
+ MySQL integration + JUnit tests (80% coverage)
+ Production JAR + documentation + demo video
+Stretch Goals: Cloud deployment (Render), 10+ e-commerce sites, affiliate links.
+Project Approach (3 pts)
+Backend (Parth): Spring Boot REST API (/api/compare?product=iPhone). ExecutorService (3 threads) scrapes Amazon/Flipkart simultaneously using Jsoup CSS selectors. TreeMap sorts prices.
+Frontend (Purvansh): Java Swing dashboard (JFrame + JTable). HttpClient calls API, org.json parses response, displays comparison table.
+Integration (Vansh): MySQL (price_history table), JUnit5 tests, Postman API validation.
+Technologies: Java 17, Spring Boot 3.x, Jsoup 1.17, Swing, MySQL 8, Maven.
+System Architecture (High Level Diagram)(2 pts)
+[Java Swing Dashboard]  [HttpClient]  [Spring Boot REST API]
+                                        
+                              [ExecutorService - 3 Threads]
+                          ┌─────────────┼─────────────┐
+                          │             │             │
+                   [Amazon]     [Flipkart]    [Sites...]
+                                                 
+                    [Jsoup]       [Jsoup]       [Jsoup]
+                                                 
+                  [TreeMap Sort]  [JSON Response]
+                                        
+                                    [MySQL JDBC]
+                              price_history table
+Project Outcome / Deliverables (1 pts)
+PriceScout.jar - Executable desktop app
+API Documentation - Postman collection + OpenAPI spec
+Source Code - GitHub repo (Maven project)
+Demo Video - 2-min screen recording
+PBL Report - UML diagrams, test coverage, benchmarks
+Price Analytics - Historical trends dashboard
+JUnit Reports - 80%+ coverage
+Bonus: Chrome extension prototype, cloud deployment guide.
+Assumptions 
+E-commerce sites maintain consistent CSS selectors (mitigated by modular scrapers)
+Public search pages accessible without login
+Localhost backend for demo (production: cloud deploy)
+1-2 second scraping timeout acceptable
+Legal: Public data only, robots.txt compliant
+References
+Jsoup Documentation: https://jsoup.org/?
+Spring Boot REST: https://spring.io/guides/gs/rest-service/?
+Java ExecutorService: https://www.baeldung.com/java-executor-service-tutorial?
+E-commerce Scraping: https://datamam.com/web-scraping-for-price-comparison/?
