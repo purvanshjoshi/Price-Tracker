@@ -1,0 +1,148 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 400px;
+    background-color: #f8fafc;
+    color: #1e293b;
+}
+
+.container {
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.subtitle {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 4px;
+}
+
+.search-box {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+input {
+    flex-grow: 1;
+    padding: 10px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+}
+
+th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    color: #475569;
+}
+
+.platform-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.platform-amazon { background-color: #fef08a; color: #854d0e; }
+.platform-flipkart { background-color: #bfdbfe; color: #1e40af; }
+
+.price-text {
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.buy-btn {
+    text-decoration: none;
+    background-color: #10b981;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.buy-btn:hover {
+    background-color: #059669;
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+
+.error-msg {
+    color: #ef4444;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+    background: #fee2e2;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid #e2e8f0;
+    border-top: 3px solid #2563eb;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px auto;
+}
+
+#loading {
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
