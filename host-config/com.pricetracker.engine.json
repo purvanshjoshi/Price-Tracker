@@ -4,6 +4,6 @@
     "path": "engine_launcher.bat",
     "type": "stdio",
     "allowed_origins": [
-        "chrome-extension://<YOUR_EXTENSION_ID_HERE>/"
+        "chrome-extension://fnlmcodbkjigjnldechpnccfgmbngaem/"
     ]
 }
