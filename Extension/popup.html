@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Tracker</title>
+    <link rel="stylesheet" href="popup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🛒 Price Scout</div>
+            <div class="subtitle">Built by Avengers</div>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search for a product (e.g., iPhone 15)..." autofocus>
+            <button id="searchBtn">Track Prices</button>
+        </div>
+
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p>Scraping deals concurrently...</p>
+        </div>
+
+        <div id="resultsContainer" class="hidden">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th>Product Details</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                    <!-- Dynamic rows will be inserted here by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        
+        <div id="error" class="hidden error-msg"></div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>
