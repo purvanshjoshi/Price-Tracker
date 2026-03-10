@@ -83,7 +83,7 @@ graph TD
 2. Setup MySQL database with `price_history` schema.
 3. Build the Java Engine JAR file using Maven.
 4. Execute the Native Messaging Host registration script (creates a registry entry pointing Chrome to the Java executable).
-5. Load the Chrome Extension in Developer Mode via `chrome://extensions/`.
+5. Load the `extension` folder in Developer Mode via `chrome://extensions/`.
 
 ---
 > **Motivation:** Build a production-grade portfolio project that demonstrates core Java syllabus (multithreading, collections, JDBC) while solving a real problem directly in the user's browser.
