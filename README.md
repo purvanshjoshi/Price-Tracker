@@ -1,42 +1,31 @@
 <div align="center">
-  <h1>🛒 Price Tracker (Price Scout)</h1>
-  <p>First Comparison Engine with Real-Time Scraping & History Tracking Built as a Chrome Extension with a Pure Java Backend</p>
-  
-  [![Java](https://img.shields.io/badge/Java-17-orange.svg?logo=java)](https://www.java.com/)
-  [![Chrome Extension](https://img.shields.io/badge/Chrome_Extension-HTML%2FJS-blue.svg?logo=googlechrome)](https://developer.chrome.com/docs/extensions/)
-  [![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg?logo=mysql)](https://www.mysql.com/)
-  [![Jsoup](https://img.shields.io/badge/Jsoup-1.17-yellow.svg)](#)
+  <img src="https://raw.githubusercontent.com/purvanshjoshi/Price-Tracker/main/extension/icons/icon128.png" alt="Price Scout Logo" width="128" height="128">
+  <h1>🛒 Price Scout (Price Tracker)</h1>
+  <p><strong>Real-Time Price Discovery & History Engine</strong></p>
+  <p><i>Find the best deals across Amazon & Flipkart instantly with a multithreaded Core Java backend and a seamless Chrome Extension.</i></p>
+
+  [![Java](https://img.shields.io/badge/Java-17-orange.svg?logo=java&style=flat-square)](https://www.java.com/)
+  [![Chrome Extension](https://img.shields.io/badge/Chrome_Extension-Manifest_V3-blue.svg?logo=googlechrome&style=flat-square)](https://developer.chrome.com/docs/extensions/)
+  [![SQLite](https://img.shields.io/badge/SQLite-3.45-lightblue.svg?logo=sqlite&style=flat-square)](https://www.sqlite.org/)
+  [![Jsoup](https://img.shields.io/badge/Jsoup-1.17-yellow.svg?style=flat-square)](https://jsoup.org/)
+  [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
 </div>
 
 <br />
 
 ## 📖 Overview
-**Price Tracker** is a high-performance price comparison engine. It allows Indian shoppers to discover the best deals across major e-commerce platforms (Amazon, Flipkart, etc.) in a fraction of a second right from their browser perfectly. Utilizing **Google Chrome Extension Native Messaging**, the browser securely communicates with a **Pure Java Backend Engine**. The Java engine utilizes **multithreading** and direct HTML parsing via **Jsoup** to deliver real-time prices simultaneously and stores trends for analytics in a local MySQL Database.
+**Price Scout** is a high-performance price comparison engine designed to eliminate "tab fatigue" for Indian shoppers. Unlike traditional price trackers that rely on cached data, Price Scout performs **real-time scraping** to deliver the absolute latest prices in under 2 seconds.
+
+Built as a hybrid system, it uses an elegant **Chrome Extension** for the frontend and a **Pure Java Backend Engine** for heavy-duty scraping. Communication is handled via **Chrome Native Messaging**, providing a secure and lightning-fast bridge between the browser and the local machine.
 
 ---
 
-## ✨ Features
-- **🚀 Real-Time Multi-threaded Scraping:** Simultaneous scraping using Java `ExecutorService` (3 threads), guaranteeing best deals in under 1.8 seconds.
-- **📊 Price History Analytics:** Tracks product price trends over time using a robust **MySQL** database.
-- **💻 Browser Integration:** Elegant **Google Chrome Extension** popup for instant, seamless searching without leaving your current webpage.
-- **⚡ Pure Java Core Engine:** The backend is built in 100% Core Java using standard I/O (no heavy API frameworks like Spring Boot required), communicating natively with Chrome.
-
----
-
-## 🛠️ Technology Stack
-### 🌐 Backend (Pure Java Engine)
-- **Core Engine:** Java 17 (Standard I/O Native Messaging)
-- **Scraper:** Jsoup 1.17 (HTML parsing)
-- **Database Connection:** JDBC + mysql-connector-j
-- **Database:** MySQL 8
-
-### 🖥️ Frontend (Chrome Extension)
-- **UI:** HTML, Vanilla CSS
-- **Logic:** Vanilla JavaScript (`chrome.runtime.sendNativeMessage`)
-
-### 🧪 Testing & Build
-- **Build Tool:** Maven (For the Java Engine)
-- **Unit Testing:** JUnit 5 (Aiming for 80%+ coverage)
+## ✨ Key Features
+- **🚀 Ultra-Fast Concurrent Scraping:** Utilizes Java's `ExecutorService` with 3 dedicated threads to scrape Amazon and Flipkart simultaneously.
+- **📊 Local Price Analytics:** Every search is logged in a local **SQLite** database, building a personal price history for trend analysis.
+- **⚡ Native Messaging Bridge:** Secure, low-latency communication between JavaScript and Java using a byte-prefixed JSON protocol.
+- **🛠️ Zero-Config Database:** No heavy database servers required; uses SQLite for persistent, file-based storage.
+- **🎯 Precision Filters:** Automatically filters out sponsored results to show only legitimate top-match products.
 
 ---
 
@@ -44,46 +33,75 @@
 
 ```mermaid
 graph TD
-    A[Chrome Extension Popup HTML/JS] -->|chrome.runtime.sendNativeMessage| B(Native Messaging Host Bridge)
-    B -->|System.in JSON Message| C{Java Scraper Engine <br/> Core Java 17}
-    C -->|Task Allocation| D[ExecutorService: 3 Threads]
-    D -->|Thread 1| E[Jsoup: Amazon Scraper]
-    D -->|Thread 2| F[Jsoup: Flipkart Scraper]
-    D -->|Thread 3| G[Jsoup: Other Sites...]
-    E --> H[TreeMap Sort]
-    F --> H
-    G --> H
-    H -->|System.out JSON Result| B
-    B -->|Callback Response| A
-    H -->|JDBC Interstitial| I[(MySQL price_history DB)]
+    A[Browser Popup UI] <-->|Native Messaging Bridge| B(Java Host Launcher)
+    B <-->|System.in / Out| C{Price Scout Engine}
+    
+    C -->|Dispatch| D[Thread Pool: 3 Workers]
+    
+    D -->|Worker 1| E[Amazon Scraper: Jsoup]
+    D -->|Worker 2| F[Flipkart Scraper: Jsoup]
+    D -->|Worker 3| G[Future Scrapers...]
+    
+    E & F & G -->|Results| H[Cheapest Price Selector]
+    H -->|Save Trend| I[(SQLite DB: price_history)]
+    H -->|Return JSON| B
 ```
 
 ---
 
-## 👥 Meet The Team (Avengers)
+## 🛠️ Technology Stack
 
-| Name | Role / Area of Focus | University Roll No / Student ID | Email |
-|------|----------------------|---------------------------------|-------|
-| 👑 **Purvansh Joshi** (Lead)| Frontend (Chrome Extension HTML/JS design & popup logic) | 2419327 / 24011731 | purvanshjoshi7534011576@gmail.com |
-| 👨‍💻 **Parth Nailwal** | Backend Engine (Core Java multithreading, Chrome Native Messaging I/O bridge) | 2418721 / 240111201 | parthnailwal2006@gmail.com |
-| 👨‍💻 **Vansh Singh** | Integration (Jsoup web scraping mapping, JDBC MySQL connection, JUnit) | 2419108 / 240111200 | vanshsinghgraphicera@gmail.com |
+| Layer | Technologies |
+| :--- | :--- |
+| **Backend Core** | Java 17, Maven |
+| **Scraping Engine** | Jsoup 1.17 (HTML Parsing / CSS Selectors) |
+| **Concurrency** | `java.util.concurrent` (ExecutorService, Future, Callable) |
+| **Database** | SQLite (via JDBC) |
+| **Communication** | Chrome Native Messaging (Standard I/O) |
+| **Frontend** | HTML5, Vanilla CSS3, JavaScript (Chrome Extension API) |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- JDK 17
-- Maven 3.8+
-- MySQL 8.0
-- Google Chrome Browser
+* **Java Development Kit (JDK) 17** or higher.
+* **Maven 3.8+** for building the project.
+* **Google Chrome** browser.
 
-### Local Development Setup (Coming Soon)
-1. Clone the repository.
-2. Setup MySQL database with `price_history` schema.
-3. Build the Java Engine JAR file using Maven inside the `backend` folder.
-4. Execute the Native Messaging Host registration script (creates a registry entry pointing Chrome to the Java executable).
-5. Load the `extension` folder in Developer Mode via `chrome://extensions/`.
+### 1. Build the Backend Engine
+Navigate to the `backend` folder and package the Java application:
+```bash
+cd backend
+mvn clean package
+```
+This generates `PriceTrackerEngine.jar` in the `target/` directory.
+
+### 2. Register the Native Messaging Host
+Chrome needs to know where the Java engine is located.
+* **Windows:** 
+  1. Open `host-config/com.pricetracker.engine.json`.
+  2. Ensure the `path` points to your `engine_launcher.bat`.
+  3. Update the registry key: `HKEY_CURRENT_USER\Software\Google\Chrome\NativeMessagingHosts\com.pricetracker.engine` to point to this JSON file.
+
+### 3. Load the Extension
+1. Open Chrome and go to `chrome://extensions/`.
+2. Enable **Developer mode** (top-right toggle).
+3. Click **Load unpacked** and select the `extension` folder from this repository.
 
 ---
-> **Motivation:** Build a production-grade portfolio project that demonstrates core Java syllabus (multithreading, collections, JDBC) while solving a real problem directly in the user's browser.
+
+## 👥 The Avengers (Meet the Team)
+
+| Name | Role | Student ID | GitHub |
+| :--- | :--- | :--- | :--- |
+| 👑 **Purvansh Joshi** | Project Lead & Frontend Architect | 24011731 | [@PurvanshJoshi](https://github.com/PurvanshJoshi) |
+| 👨‍💻 **Parth Nailwal** | Backend Core & Concurrency Specialist | 240111201 | [@parthnailwal](https://github.com/parthnailwal) |
+| 👨‍💻 **Vansh Singh** | Scraper Logic & JDBC Integration | 240111200 | [@vanshsingh](https://github.com/vanshsingh) |
+
+---
+
+## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+> **Project Goal:** Demonstrate the power of Core Java (Multithreading, I/O, JDBC) in a real-world, user-facing application while providing shoppers with a tool that actually works.
