@@ -54,59 +54,53 @@ graph TD
 
 ---
 
-## 🛠️ Technology Stack
+---
 
-| Layer | Technologies |
+## 🛠️ The Core Technology Stack
+
+| Layer | Tools & Technologies |
 | :--- | :--- |
-| **Backend Core** | Java 17, Maven |
-| **Scraping Engine** | Jsoup 1.17 (HTML Parsing / CSS Selectors) |
-| **Concurrency** | `java.util.concurrent` (ExecutorService, Future, Callable) |
-| **Database** | SQLite (via JDBC) |
-| **Communication** | Chrome Native Messaging (Standard I/O) |
-| **Frontend** | HTML5, Vanilla CSS3, JavaScript (Chrome Extension API) |
+| **Backend Core** | <img src="https://img.shields.io/badge/Java-17-orange?logo=java"> <img src="https://img.shields.io/badge/Maven-3.9-C71A36?logo=apache-maven"> |
+| **Parsing Engine** | <img src="https://img.shields.io/badge/Jsoup-1.17-yellow"> (HTML DOM / CSS Selectors) |
+| **Concurrency** | `java.util.concurrent` (ExecutorService, Async Future) |
+| **Database** | <img src="https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite"> (Zero-Configuration Persistent Storage) |
+| **Messaging** | **Chrome Native Messaging** (4-Byte Byte-Stream Protocol) |
+| **Frontend UI** | <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5"> <img src="https://img.shields.io/badge/CSS3-1572B6?logo=css3"> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript"> |
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Deployment & Installation
+Running **Price Scout** requires a quick one-time handshake between your browser and your machine.
 
-### Prerequisites
-* **Java Development Kit (JDK) 17** or higher.
-* **Maven 3.8+** for building the project.
-* **Google Chrome** browser.
+### 📋 Prerequisites
+- **JDK 17+** & **Maven** installed.
+- **Google Chrome** browser.
 
-### 1. Build the Backend Engine
-Navigate to the `backend` folder and package the Java application:
-```bash
-cd backend
-mvn clean package
-```
-This generates `PriceTrackerEngine.jar` in the `target/` directory.
+### 🛠️ Setup in 3 Quick Steps
+For a complete walkthrough, see the [Detailed Setup Guide](docs/setup_guide.md).
 
-### 2. Register the Native Messaging Host
-Chrome needs to know where the Java engine is located.
-* **Windows:** 
-  1. Open `host-config/com.pricetracker.engine.json`.
-  2. Ensure the `path` points to your `engine_launcher.bat`.
-  3. Update the registry key: `HKEY_CURRENT_USER\Software\Google\Chrome\NativeMessagingHosts\com.pricetracker.engine` to point to this JSON file.
-
-### 3. Load the Extension
-1. Open Chrome and go to `chrome://extensions/`.
-2. Enable **Developer mode** (top-right toggle).
-3. Click **Load unpacked** and select the `extension` folder from this repository.
+1. **Build the Engine:** Run `mvn clean package` inside the `backend` folder.
+2. **Register Host:** Link your registry via the `host-config/` scripts.
+3. **Install Extension:** Load the `extension/` folder in Chrome Developer Mode.
 
 ---
 
-## 👥 The Avengers (Meet the Team)
+## 🦸‍♂️ The Avengers (Engineered by)
 
-| Name | Role | Student ID | GitHub |
+<div align="center">
+
+| Hero | Role | Focus | GitHub |
 | :--- | :--- | :--- | :--- |
-| 👑 **Purvansh Joshi** | Project Lead & Frontend Architect | 24011731 | [@PurvanshJoshi](https://github.com/PurvanshJoshi) |
-| 👨‍💻 **Parth Nailwal** | Backend Core & Concurrency Specialist | 240111201 | [@parthnailwal](https://github.com/parthnailwal) |
-| 👨‍💻 **Vansh Singh** | Scraper Logic & JDBC Integration | 240111200 | [@vanshsingh](https://github.com/vanshsingh) |
+| 🛡️ **Purvansh Joshi** | **Architect** | UI/UX & Native Messaging | [@PurvanshJoshi](https://github.com/PurvanshJoshi) |
+| ⚡ **Parth Nailwal** | **Backend Lead** | Multithreading & Logic | [@parthnailwal](https://github.com/parthnailwal) |
+| 🏹 **Vansh Singh** | **Data Lead** | Scrapers & SQLite | [@vanshsingh](https://github.com/vanshsingh) |
 
----
+</div>
 
-## 📜 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+<br />
 
-> **Project Goal:** Demonstrate the power of Core Java (Multithreading, I/O, JDBC) in a real-world, user-facing application while providing shoppers with a tool that actually works.
+<div align="center">
+  <p><i>"The power of Java, the reach of the Browser."</i></p>
+  <img src="https://img.shields.io/badge/Status-Complete-green?style=for-the-badge" alt="Status">
+</div>
+
