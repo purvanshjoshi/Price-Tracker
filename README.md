@@ -1,31 +1,36 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/purvanshjoshi/Price-Tracker/master/extension/icons/logo.png" alt="Price Scout Logo" width="128" height="128">
-  <h1>🛒 Price Scout (Price Tracker)</h1>
-  <p><strong>Real-Time Price Discovery & History Engine</strong></p>
-  <p><i>Find the best deals across Amazon & Flipkart instantly with a multithreaded Core Java backend and a seamless Chrome Extension.</i></p>
+  <img src="https://raw.githubusercontent.com/purvanshjoshi/Price-Tracker/master/extension/icons/icon128.png" alt="Price Scout Logo" width="120" height="120">
+  <h1>🚀 Price Scout</h1>
+  <p><strong>The Intelligent Real-Time Price Discovery Engine</strong></p>
+  <p><i>Stop chasing deals. Let them come to you with a multithreaded Core Java backend and a premium Chrome Extension experience.</i></p>
 
-  [![Java](https://img.shields.io/badge/Java-17-orange.svg?logo=java&style=flat-square)](https://www.java.com/)
-  [![Chrome Extension](https://img.shields.io/badge/Chrome_Extension-Manifest_V3-blue.svg?logo=googlechrome&style=flat-square)](https://developer.chrome.com/docs/extensions/)
-  [![SQLite](https://img.shields.io/badge/SQLite-3.45-lightblue.svg?logo=sqlite&style=flat-square)](https://www.sqlite.org/)
-  [![Jsoup](https://img.shields.io/badge/Jsoup-1.17-yellow.svg?style=flat-square)](https://jsoup.org/)
-  [![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](LICENSE)
+  <p>
+    <img src="https://img.shields.io/badge/Java-17-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java 17">
+    <img src="https://img.shields.io/badge/Chrome-Extension-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Chrome Extension">
+    <img src="https://img.shields.io/badge/SQLite-Database-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="SQLite">
+    <img src="https://img.shields.io/badge/Jsoup-Scraper-FF9900?style=for-the-badge&logo=java&logoColor=white" alt="Jsoup">
+  </p>
 </div>
 
 <br />
 
-## 📖 Overview
-**Price Scout** is a high-performance price comparison engine designed to eliminate "tab fatigue" for Indian shoppers. Unlike traditional price trackers that rely on cached data, Price Scout performs **real-time scraping** to deliver the absolute latest prices in under 2 seconds.
+## 🌟 The Vision
+In an era of dynamic pricing and "Big Billion" sales, manual price checking is a waste of time. **Price Scout** is a performance-first tool designed by **The Avengers** to deliver real-time product data directly from the source. No more old, cached prices—just the absolute latest truth from Amazon and Flipkart, delivered in milliseconds.
 
-Built as a hybrid system, it uses an elegant **Chrome Extension** for the frontend and a **Pure Java Backend Engine** for heavy-duty scraping. Communication is handled via **Chrome Native Messaging**, providing a secure and lightning-fast bridge between the browser and the local machine.
+## 🎯 Why Price Scout?
+Traditional trackers often show prices that are hours or even days old. **Price Scout** is different:
+- **Zero Latency:** We don't use a "middleman" API. The scraping happens locally on your machine.
+- **Privacy First:** Your search data stays in your local SQLite database, not on our servers.
+- **Pure Performance:** Multi-threaded execution means we check multiple stores at the exact same time.
 
 ---
 
-## ✨ Key Features
-- **🚀 Ultra-Fast Concurrent Scraping:** Utilizes Java's `ExecutorService` with 3 dedicated threads to scrape Amazon and Flipkart simultaneously.
-- **📊 Local Price Analytics:** Every search is logged in a local **SQLite** database, building a personal price history for trend analysis.
-- **⚡ Native Messaging Bridge:** Secure, low-latency communication between JavaScript and Java using a byte-prefixed JSON protocol.
-- **🛠️ Zero-Config Database:** No heavy database servers required; uses SQLite for persistent, file-based storage.
-- **🎯 Precision Filters:** Automatically filters out sponsored results to show only legitimate top-match products.
+## ⚡ Key Highlights
+- **💨 Concurrent Engine:** Powered by Java `ExecutorService`, our engine spawns multiple workers to race for the best price.
+- **🔍 4-Byte Native Protocol:** Uses the high-speed **Chrome Native Messaging** bridge to communicate between Java and JS.
+- **📦 Zero-Configuration SQL:** Leverages SQLite for a portable, file-based history that requires no server setup.
+- **🎭 Intelligent Selectors:** Advanced Jsoup implementation that adapts to e-commerce site structures.
+- **📊 Trend Awareness:** Logs every lookup with precision timestamps to help you identify price drops over time.
 
 ---
 
