@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/purvanshjoshi/Price-Tracker/master/extension/icons/icon128.png" alt="Price Scout Logo" width="120" height="120">
+  <img src="https://raw.githubusercontent.com/purvanshjoshi/Price-Tracker/master/extension/icons/logo.png" alt="Price Scout Logo" width="128" height="128">
   <h1>🚀 Price Scout</h1>
   <p><strong>The Intelligent Real-Time Price Discovery Engine</strong></p>
   <p><i>Stop chasing deals. Let them come to you with a multithreaded Core Java backend and a premium Chrome Extension experience.</i></p>
