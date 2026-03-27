@@ -25,6 +25,17 @@
         </div>
 
         <div id="resultsContainer" class="hidden">
+            <!-- Controls: Sort + Filter -->
+            <div class="results-controls">
+                <select id="sortSelect" title="Sort results">
+                    <option value="cheapest">Cheapest First</option>
+                    <option value="priciest">Priciest First</option>
+                    <option value="platform-az">Platform A–Z</option>
+                    <option value="platform-za">Platform Z–A</option>
+                </select>
+                <input type="text" id="filterInput" placeholder="Filter results..." title="Real-time filter">
+            </div>
+
             <table>
                 <thead>
                     <tr>
@@ -38,6 +49,7 @@
                     <!-- Dynamic rows will be inserted here by JavaScript -->
                 </tbody>
             </table>
+            <div id="resultCount" class="result-count"></div>
         </div>
         
         <div id="error" class="hidden error-msg"></div>
