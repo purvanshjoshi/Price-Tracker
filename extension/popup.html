@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <header>
-            <div class="logo">🛒 Price Scout</div>
+            <div class="logo">💰 Price Scout</div>
             <div class="subtitle">Built by Avengers</div>
         </header>
 
@@ -25,6 +25,17 @@
         </div>
 
         <div id="resultsContainer" class="hidden">
+            <!-- Filter + Sort toolbar -->
+            <div class="filter-bar">
+                <input type="text" id="filterInput" placeholder="Filter results..." class="filter-input">
+                <div class="sort-buttons">
+                    <span class="sort-label">Sort:</span>
+                    <button id="sortCheapest" class="sort-btn active" data-sort="cheapest">Cheapest</button>
+                    <button id="sortRecent" class="sort-btn" data-sort="recent">Recent</button>
+                    <button id="sortPlatform" class="sort-btn" data-sort="platform">Platform</button>
+                </div>
+            </div>
+            <div id="countBar" class="count-bar"></div>
             <table>
                 <thead>
                     <tr>
@@ -39,7 +50,7 @@
                 </tbody>
             </table>
         </div>
-        
+
         <div id="error" class="hidden error-msg"></div>
     </div>
 

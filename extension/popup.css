@@ -64,6 +64,77 @@ button:hover {
     background-color: #1d4ed8;
 }
 
+/* Filter bar */
+.filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.filter-input {
+    flex-grow: 1;
+    padding: 7px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 13px;
+    outline: none;
+    background: white;
+    transition: border-color 0.2s;
+}
+
+.filter-input:focus {
+    border-color: #2563eb;
+}
+
+.sort-buttons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.sort-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.sort-btn {
+    background: white;
+    color: #475569;
+    border: 1px solid #cbd5e1;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.sort-btn:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+.sort-btn.active {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+
+/* Count bar */
+.count-bar {
+    font-size: 12px;
+    color: #64748b;
+    text-align: right;
+    margin-bottom: 6px;
+}
+
+/* Table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -114,6 +185,24 @@ th {
 
 .buy-btn:hover {
     background-color: #059669;
+}
+
+/* Best deal highlight */
+.best-deal-row td {
+    background-color: #f0fdf4;
+}
+
+.best-deal-badge {
+    display: inline-block;
+    background: #10b981;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+    letter-spacing: 0.3px;
 }
 
 /* Utilities */
