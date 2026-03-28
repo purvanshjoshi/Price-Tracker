@@ -99,8 +99,17 @@ For a complete walkthrough, see the [Detailed Setup Guide](docs/setup_guide.md).
 
 <br />
 
+---
+
+## 🛡️ Quality Assurance
+To maintain high standards, every Pull Request is automatically vetted by our "Avengers Guard" suite:
+- **Build & Test**: Maven-based compilation checks.
+- **Style Guard**: Automated [Checkstyle](checkstyle.xml) verification.
+- **Security**: Automated vulnerability scanning for all dependencies.
+- **Hygiene**: Semantic PR title linting.
+
 <div align="center">
   <p><i>"The power of Java, the reach of the Browser."</i></p>
-  <img src="https://img.shields.io/badge/Status-Complete-green?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/Status-Active-blue?style=for-the-badge" alt="Status">
 </div>
 
