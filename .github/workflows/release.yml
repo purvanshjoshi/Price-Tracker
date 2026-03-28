@@ -1,0 +1,44 @@
+name: "Build & Release"
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: "Create Release"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build Backend JAR
+        run: |
+          cd backend
+          mvn -B clean package --file pom.xml
+
+      - name: Prepare Extension Zip
+        run: |
+          zip -r PriceScout-Extension.zip extension/
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            backend/target/PriceTrackerEngine.jar
+            PriceScout-Extension.zip
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
