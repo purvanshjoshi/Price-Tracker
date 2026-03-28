@@ -1,14 +1,23 @@
-name: "🛡️ Avengers Guard"
+name: Avengers Guard
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ master, main ]
     types: [opened, edited, synchronize, reopened]
+  push:
+    branches: [ master, main ]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  statuses: write
+  actions: read
 
 jobs:
   # 1. Validate PR Title (Semantic Naming)
-  naming_standard:
-    name: "📛 Naming Standard"
+  naming-standard:
+    name: "PR Naming Standard"
     runs-on: ubuntu-latest
     steps:
       - uses: amannn/action-semantic-pull-request@v5.4.0
@@ -29,8 +38,8 @@ jobs:
             revert
 
   # 2. Analyze PR Complexity (Size Labeling)
-  complexity_analytics:
-    name: "📊 Complexity Analytics"
+  complexity-analytics:
+    name: "PR Size Analytics"
     runs-on: ubuntu-latest
     steps:
       - uses: codelytv/pr-size-labeler@v1.10.0
@@ -42,8 +51,8 @@ jobs:
           l_max_size: '1200'
 
   # 3. Security Vulnerability Scan
-  security_scan:
-    name: "🛡️ Security Scan"
+  security-scan:
+    name: "Security Vulnerability Scan"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -51,11 +60,11 @@ jobs:
       - name: Dependency Review
         uses: actions/dependency-review-action@v4
         with:
-          fail-on-severity: critical
+          fail-on-severity: high
 
   # 4. Java Code Style Guard
-  style_guard:
-    name: "✨ Style Guard"
+  style-guard:
+    name: "Java Code Style Guard"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -67,9 +76,9 @@ jobs:
           checkstyle_config: checkstyle.xml
           level: warning
 
-  # 5. Full Engine Build Verification
-  engine_build:
-    name: "🧪 Engine Build"
+  # 5. Engine Build Verification
+  engine-build:
+    name: "Backend Engine Build"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
@@ -84,8 +93,3 @@ jobs:
         run: |
           cd backend
           mvn -B clean package --file pom.xml
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: PriceTrackerEngine
-          path: backend/target/PriceTrackerEngine.jar
