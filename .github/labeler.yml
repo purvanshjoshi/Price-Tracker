@@ -1,0 +1,12 @@
+area:backend:
+  - 'backend/**/*'
+
+area:extension:
+  - 'extension/**/*'
+
+area:docs:
+  - '*.md'
+  - 'docs/**/*'
+
+area:github:
+  - '.github/**/*'
