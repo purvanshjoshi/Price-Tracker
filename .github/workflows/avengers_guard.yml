@@ -1,0 +1,98 @@
+name: Avengers Guard
+
+on:
+  pull_request:
+    branches: [ master, main ]
+    types: [opened, edited, synchronize, reopened]
+  push:
+    branches: [ master, main ]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  statuses: write
+  actions: read
+
+jobs:
+  # 1. Validate PR Title (Semantic Naming)
+  naming-standard:
+    name: "PR Naming Standard"
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5.4.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            fix
+            feat
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore
+            revert
+
+  # 2. Analyze PR Complexity (Size Labeling)
+  complexity-analytics:
+    name: "PR Size Analytics"
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: codelytv/pr-size-labeler@v1.10.0
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          xs_max_size: '15'
+          s_max_size: '150'
+          m_max_size: '600'
+          l_max_size: '1200'
+
+  # 3. Security Vulnerability Scan
+  security-scan:
+    name: "Security Vulnerability Scan"
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high
+
+  # 4. Java Code Style Guard
+  style-guard:
+    name: "Java Code Style Guard"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Run Checkstyle
+        uses: dbelyaev/action-checkstyle@master
+        with:
+          github_token: ${{ secrets.github_token }}
+          checkstyle_config: checkstyle.xml
+          level: warning
+
+  # 5. Engine Build Verification
+  engine-build:
+    name: "Backend Engine Build"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        run: |
+          cd backend
+          mvn -B clean package --file pom.xml

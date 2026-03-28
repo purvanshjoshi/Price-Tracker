@@ -1,0 +1,12 @@
+# Auto Assign Configuration
+addReviewers: true
+reviewers:
+  - "purvanshjoshi"
+addAssignees: true
+assignees:
+  - "purvanshjoshi"
+numberOfReviewers: 1
+numberOfAssignees: 1
+skipKeywords:
+  - "WIP"
+  - "Draft"
