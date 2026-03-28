@@ -18,6 +18,7 @@ jobs:
   # 1. Validate PR Title (Semantic Naming)
   naming-standard:
     name: "PR Naming Standard"
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: amannn/action-semantic-pull-request@v5.4.0
@@ -40,6 +41,7 @@ jobs:
   # 2. Analyze PR Complexity (Size Labeling)
   complexity-analytics:
     name: "PR Size Analytics"
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - uses: codelytv/pr-size-labeler@v1.10.0
@@ -53,6 +55,7 @@ jobs:
   # 3. Security Vulnerability Scan
   security-scan:
     name: "Security Vulnerability Scan"
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
