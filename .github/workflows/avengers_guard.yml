@@ -44,7 +44,7 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: codelytv/pr-size-labeler@v1.10.0
+      - uses: codelytv/pr-size-labeler@v1.10.3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           xs_max_size: '15'
