@@ -1,0 +1,20 @@
+name: 'Dependency Review'
+
+on: [pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v4
+      - name: 'Dependency Review'
+        uses: actions/dependency-review-action@v4
+        with:
+          # Only fail if a new vulnerability is discovered with a high severity or higher
+          fail-on-severity: high
+          # Stop PRs that introduce new dependencies with these licenses
+          # deny-licenses: LGPL-2.0, LGPL-3.0
