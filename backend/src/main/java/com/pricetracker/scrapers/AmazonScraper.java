@@ -5,6 +5,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.pricetracker.engine.SelectorConfig;
+
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
@@ -24,44 +26,48 @@ public class AmazonScraper implements ScraperCallable {
             String url = "https://www.amazon.in/s?k=" + encodedQuery;
 
             // 2. Connect via Jsoup and download HTML
-            // We spoof the User-Agent so Amazon doesn't block us as a bot
             Document doc = Jsoup.connect(url)
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
                     .header("Accept-Language", "en-US,en;q=0.9")
                     .timeout(5000)
                     .get();
 
-            // 3. Extract the first product result from the page
-            // Amazon specific CSS wrapper for search results
-            Element firstResult = doc.selectFirst("div[data-component-type='s-search-result']");
+            // 3. Extract the first product result from the page using dynamic selectors
+            String wrapperSelector = SelectorConfig.get("amazon", "product_wrapper");
+            Element firstResult = doc.selectFirst(wrapperSelector);
             
             if (firstResult != null) {
                 // Extract Name
-                Element titleElement = firstResult.selectFirst("h2 a span");
+                String titleSelector = SelectorConfig.get("amazon", "title");
+                Element titleElement = firstResult.selectFirst(titleSelector);
                 String title = (titleElement != null) ? titleElement.text() : "Unknown Product";
 
                 // Extract Price
-                Element priceElement = firstResult.selectFirst("span.a-price-whole");
+                String priceSelector = SelectorConfig.get("amazon", "price");
+                Element priceElement = firstResult.selectFirst(priceSelector);
                 double price = 0.0;
                 if (priceElement != null) {
-                    // Amazon prices have commas (e.g. 75,000) that need to be removed to parse to Double
                     String cleanPrice = priceElement.text().replace(",", "").replace("₹", "").trim();
                     try {
+                        price = System.getProperty("os.name").contains("Windows") ? Double.parseDouble(cleanPrice) : Double.parseDouble(cleanPrice);
+                        // Standardize the parsing
                         price = Double.parseDouble(cleanPrice);
                     } catch (NumberFormatException e) {
-                        System.err.println("Amazon Price Parsing Error: " + cleanPrice);
+                        System.err.println("[Amazon] Price Parsing Error: " + cleanPrice);
                     }
                 }
 
-                // Extract specific product Link
-                Element linkElement = firstResult.selectFirst("h2 a");
+                // Extract Specific Link
+                String linkSelector = SelectorConfig.get("amazon", "link");
+                Element linkElement = firstResult.selectFirst(linkSelector);
                 String productLink = url; 
                 if (linkElement != null) {
                     productLink = "https://www.amazon.in" + linkElement.attr("href");
                 }
 
-                // Return the neat Product object back to our Engine
                 return new Product(title, price, "Amazon", productLink);
+            } else {
+                System.err.println("[Amazon] No product card found using selector: " + wrapperSelector);
             }
 
         } catch (Exception e) {

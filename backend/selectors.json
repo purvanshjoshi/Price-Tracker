@@ -1,0 +1,14 @@
+{
+  "amazon": {
+    "product_wrapper": "div[data-component-type='s-search-result']",
+    "title": "h2 a span",
+    "price": ".a-price-whole",
+    "link": "h2 a"
+  },
+  "flipkart": {
+    "product_wrapper": "a.k7wcnx",
+    "title": ".RG5Slk",
+    "price": ".hZ3P6w.DeU9vF",
+    "link": "a"
+  }
+}

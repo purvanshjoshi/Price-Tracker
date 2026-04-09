@@ -4,6 +4,6 @@
     "path": "d:\\Price Tracker\\host-config\\engine_launcher.bat",
     "type": "stdio",
     "allowed_origins": [
-        "chrome-extension://fnlmcodbkjigjnldechpnccfgmbngaem"
+        "chrome-extension://fnlmcodbkjigjnldechpnccfgmbngaem/"
     ]
 }
