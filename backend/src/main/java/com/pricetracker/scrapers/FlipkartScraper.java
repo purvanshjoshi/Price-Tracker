@@ -8,6 +8,11 @@ import org.jsoup.nodes.Element;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
+import com.pricetracker.engine.SelectorConfig;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 public class FlipkartScraper implements ScraperCallable {
 
     private final String searchKeyword;
@@ -29,17 +34,14 @@ public class FlipkartScraper implements ScraperCallable {
                     .timeout(5000)
                     .get();
 
-            // 3. Extract the first product result
-            // Flipkart uses obfuscated CSS classes, but there are standard wrappers we can rely on.
-            // A common wrapper for product cards in list view is usually an 'a' tag acting as a block, or a specific div class
-            Element firstResult = doc.selectFirst("div[data-id]"); 
+            // 3. Extract the first product result using dynamic selectors
+            String wrapperSelector = SelectorConfig.get("flipkart", "product_wrapper");
+            Element firstResult = doc.selectFirst(wrapperSelector); 
             
             if (firstResult != null) {
                 // Determine Title
-                // Flipkart commonly uses multiple different structures depending on the category.
-                // We will try the most common class combinations for titles.
-                Element titleElement = firstResult.selectFirst("div.KzDlHZ"); // Example updated class, these change frequently
-                if (titleElement == null) { titleElement = firstResult.selectFirst("a[title]"); }
+                String titleSelector = SelectorConfig.get("flipkart", "title");
+                Element titleElement = firstResult.selectFirst(titleSelector);
                 
                 String title = "Unknown Product";
                 if (titleElement != null) {
@@ -47,25 +49,29 @@ public class FlipkartScraper implements ScraperCallable {
                 }
 
                 // Determine Price
-                Element priceElement = firstResult.selectFirst("div.Nx9bqj"); // Another frequently changing class for the main price
+                String priceSelector = SelectorConfig.get("flipkart", "price");
+                Element priceElement = firstResult.selectFirst(priceSelector);
                 double price = 0.0;
                 if (priceElement != null) {
                     String cleanPrice = priceElement.text().replace("₹", "").replace(",", "").trim();
                      try {
                         price = Double.parseDouble(cleanPrice);
                     } catch (NumberFormatException e) {
-                        System.err.println("Flipkart Price Parsing Error: " + cleanPrice);
+                        System.err.println("[Flipkart] Price Parsing Error: " + cleanPrice);
                     }
                 }
 
                 // Determine URL
-                Element linkElement = firstResult.selectFirst("a");
+                String linkSelector = SelectorConfig.get("flipkart", "link");
+                Element linkElement = firstResult.selectFirst(linkSelector);
                 String productLink = url;
                 if (linkElement != null && linkElement.hasAttr("href")) {
                      productLink = "https://www.flipkart.com" + linkElement.attr("href");
                 }
 
                 return new Product(title, price, "Flipkart", productLink);
+            } else {
+                System.err.println("[Flipkart] No product card found using selector: " + wrapperSelector);
             }
 
         } catch (Exception e) {
