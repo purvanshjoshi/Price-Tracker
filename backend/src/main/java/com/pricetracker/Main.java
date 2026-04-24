@@ -31,6 +31,14 @@ public class Main {
                 if (jsonInput.has("query")) {
                     String query = jsonInput.getString("query");
                     
+                    // Validate incoming search input before scraping or database interaction
+                    if (!isValidSearchQuery(query)) {
+                        JSONObject errorOutput = new JSONObject();
+                        errorOutput.put("error", "Invalid search query.");
+                        MessageParser.sendMessage(System.out, errorOutput);
+                        continue;
+                    }
+                    
                     // 3. Command the engine to scrape Amazon & Flipkart concurrently
                     TreeMap<Double, Product> results = engine.executeSearch(query);
 
@@ -54,5 +62,23 @@ public class Main {
                 System.err.println("Fatal Error in Main Loop: " + e.getMessage());
             }
         }
+    }
+
+    // Basic validation to reject malformed or suspicious search input
+    private static boolean isValidSearchQuery(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return false;
+        }
+
+        if (query.length() > 100) {
+            return false;
+        }
+
+        String lowerQuery = query.toLowerCase();
+
+        return !lowerQuery.contains(";")
+                && !lowerQuery.contains("--")
+                && !lowerQuery.contains("/*")
+                && !lowerQuery.contains("*/");
     }
 }
