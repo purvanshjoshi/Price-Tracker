@@ -173,7 +173,9 @@ The development follows a phased approach to increase intelligence and resilienc
 Price Scout is engineered and maintained by **The Avengers** team.
 
 - **Purvansh Joshi**: Lead Systems Architect & Engine Developer
-- **The Avengers**: Core Contributors & Resilience Engineers
+- **Parth Nailwal**: Core Contributor & Systems Resilience
+- **Vansh Singh**: Core Contributor & Automation Engineer
+- **The Avengers**: Development Group
 
 ---
 
