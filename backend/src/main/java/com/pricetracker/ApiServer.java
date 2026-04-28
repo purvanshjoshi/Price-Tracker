@@ -1,6 +1,10 @@
 package com.pricetracker;
 
-import static spark.Spark.*;
+import static spark.Spark.get;
+import static spark.Spark.port;
+import static spark.Spark.before;
+import static spark.Spark.options;
+
 import com.google.gson.Gson;
 import com.pricetracker.engine.EngineManager;
 import com.pricetracker.model.Product;
@@ -43,11 +47,17 @@ public class ApiServer {
                 return gson.toJson(new ErrorResponse("Search query 'q' is required."));
             }
 
-            System.out.println("Cloud API: Searching for " + query);
+            // Security Sanitization for CodeQL
+            String sanitizedQuery = query.replaceAll("[^a-zA-Z0-9\\s]", "").trim();
+            if (sanitizedQuery.length() > 100) {
+                sanitizedQuery = sanitizedQuery.substring(0, 100);
+            }
+
+            System.out.println("Cloud API: Searching for " + sanitizedQuery);
             
             // Trigger our existing EngineManager logic
             EngineManager engine = new EngineManager();
-            Collection<Product> results = engine.executeSearch(query).values();
+            Collection<Product> results = engine.executeSearch(sanitizedQuery).values();
             
             return gson.toJson(results);
         });
