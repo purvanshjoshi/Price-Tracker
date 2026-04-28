@@ -168,5 +168,14 @@ The development follows a phased approach to increase intelligence and resilienc
 
 ---
 
+## Meet The Team
+
+Price Scout is engineered and maintained by **The Avengers** team.
+
+- **Purvansh Joshi**: Lead Systems Architect & Engine Developer
+- **The Avengers**: Core Contributors & Resilience Engineers
+
+---
+
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
