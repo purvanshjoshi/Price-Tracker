@@ -45,6 +45,41 @@
             <version>6.0.3</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Selenium for Headless Browser (Bypassing Amazon 503) -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.16.1</version>
+        </dependency>
+
+        <!-- Automatic ChromeDriver management -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.6.2</version>
+        </dependency>
+
+        <!-- Spark Java for Web API -->
+        <dependency>
+            <groupId>com.sparkjava</groupId>
+            <artifactId>spark-core</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+
+        <!-- JSON Handling -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>
+        </dependency>
+
+        <!-- Logging for Spark -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.7</version>
+        </dependency>
     </dependencies>
 
     <build>

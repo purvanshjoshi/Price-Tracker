@@ -1,0 +1,176 @@
+/* Floating Action Button (FAB) */
+#price-scout-fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 2147483647;
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.4);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid white;
+}
+
+#price-scout-fab:hover {
+    transform: translateY(-5px) scale(1.05);
+    background: #0056b3;
+    box-shadow: 0 15px 30px rgba(0, 123, 255, 0.5);
+}
+
+.fab-icon {
+    background: white;
+    color: #007bff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.fab-label {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1;
+}
+
+.fab-product {
+    font-size: 10px;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+/* Side Panel Overlay */
+#price-scout-overlay {
+    position: fixed;
+    top: 0;
+    right: -450px;
+    width: 380px;
+    height: 100%;
+    background: white;
+    z-index: 2147483647;
+    box-shadow: -10px 0 50px rgba(0,0,0,0.15);
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+#price-scout-overlay.open {
+    right: 0;
+}
+
+.scout-side-panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.scout-side-panel header {
+    padding: 25px;
+    background: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.scout-logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.scout-logo span { color: #007bff; }
+
+.scout-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ccc;
+    line-height: 1;
+}
+
+.scout-close:hover { color: #333; }
+
+/* Results List */
+#scout-results-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.scout-item {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: 0.2s;
+}
+
+.scout-item:hover {
+    border-color: #007bff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.item-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.item-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #28a745;
+}
+
+.item-name {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.item-link {
+    display: block;
+    text-align: center;
+    padding: 8px;
+    background: #f0f7ff;
+    color: #007bff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.item-link:hover { background: #007bff; color: white; }
+
+/* Badges */
+[class^="badge-"] {
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.badge-amazon { background: #ff9900; }
+.badge-flipkart { background: #2874f0; }
+
+.scout-searching {
+    text-align: center;
+    padding: 50px;
+    color: #999;
+    font-style: italic;
+}
