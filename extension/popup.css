@@ -1,229 +1,182 @@
 body {
-    font-family: 'Inter', sans-serif;
+    width: 450px;
     margin: 0;
-    padding: 0;
-    width: 400px;
-    background-color: #f8fafc;
-    color: #1e293b;
+    padding: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
 }
 
 .container {
+    background: white;
     padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 header {
     text-align: center;
     margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: 600;
-    color: #2563eb;
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #007bff;
 }
 
-.subtitle {
-    font-size: 12px;
-    color: #64748b;
-    margin-top: 4px;
+header p {
+    margin: 5px 0 0;
+    font-size: 0.85rem;
+    color: #666;
 }
 
-.search-box {
+/* Search Section */
+.search-section {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-input {
-    flex-grow: 1;
-    padding: 10px 14px;
-    border: 1px solid #cbd5e1;
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
     border-radius: 6px;
     font-size: 14px;
-    outline: none;
-    transition: border-color 0.2s;
 }
 
-input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-}
-
-button {
-    background-color: #2563eb;
+button#searchBtn {
+    padding: 10px 20px;
+    background-color: #007bff;
     color: white;
     border: none;
-    padding: 10px 16px;
     border-radius: 6px;
-    font-weight: 500;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s;
-    white-space: nowrap;
+    transition: 0.2s;
 }
 
-button:hover {
-    background-color: #1d4ed8;
+button#searchBtn:hover {
+    background-color: #0056b3;
 }
 
-button:disabled {
-    background-color: #93c5fd;
-    cursor: not-allowed;
+button#searchBtn:disabled {
+    background-color: #ccc;
 }
 
-.results-controls {
+/* Controls */
+.controls {
     display: flex;
-    gap: 8px;
-    margin-bottom: 10px;
+    gap: 10px;
+    margin-bottom: 15px;
 }
 
-#sortSelect {
-    padding: 7px 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 12px;
-    font-family: 'Inter', sans-serif;
-    background: white;
-    color: #334155;
-    cursor: pointer;
-    outline: none;
-    flex-shrink: 0;
+#sortSelect, #filterInput {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
 }
 
-#sortSelect:focus {
-    border-color: #2563eb;
-}
+#filterInput { flex: 1; }
 
-#filterInput {
-    flex-grow: 1;
-    padding: 7px 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    font-size: 12px;
-    font-family: 'Inter', sans-serif;
-    outline: none;
-    transition: border-color 0.2s;
-    color: #334155;
-}
-
-#filterInput:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
-}
-
-#filterInput::placeholder {
-    color: #94a3b8;
-}
-
+/* Table */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
-    font-size: 13px;
+    margin-top: 10px;
 }
 
 th {
-    background-color: #f1f5f9;
-    font-weight: 600;
-    color: #475569;
+    text-align: left;
+    font-size: 0.85rem;
+    color: #666;
+    border-bottom: 2px solid #eee;
+    padding: 8px;
 }
 
-tr:last-child td {
-    border-bottom: none;
+td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    vertical-align: middle;
 }
 
+/* Badges */
 .platform-badge {
-    padding: 4px 8px;
-    border-radius: 12px;
     font-size: 11px;
-    font-weight: 600;
-    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    color: white;
 }
 
-.platform-amazon { background-color: #fef08a; color: #854d0e; }
-.platform-flipkart { background-color: #bfdbfe; color: #1e40af; }
+.platform-amazon { background-color: #ff9900; }
+.platform-flipkart { background-color: #2874f0; }
 
 .best-deal-badge {
-    display: inline-block;
-    margin-left: 4px;
-    padding: 2px 6px;
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-    border-radius: 8px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    vertical-align: middle;
-    box-shadow: 0 1px 2px rgba(16, 185, 129, 0.4);
+    display: block;
+    font-size: 9px;
+    color: #28a745;
+    font-weight: bold;
+    margin-top: 4px;
+    text-transform: uppercase;
 }
 
-.price-text {
-    font-weight: 600;
-    color: #0f172a;
-}
+/* Pricing */
+.price-text { font-weight: bold; color: #333; }
+.price-cheapest { font-weight: bold; color: #28a745; font-size: 16px; }
 
-.price-cheapest {
-    font-weight: 700;
-    color: #059669; /* Green for best deal */
-}
-
+/* Action */
 .buy-btn {
     text-decoration: none;
-    background-color: #10b981;
-    color: white;
-    padding: 6px 12px;
+    color: #007bff;
+    font-weight: bold;
+    border: 1px solid #007bff;
+    padding: 4px 10px;
     border-radius: 4px;
     font-size: 12px;
-    font-weight: 500;
 }
 
 .buy-btn:hover {
-    background-color: #059669;
+    background-color: #007bff;
+    color: white;
 }
 
-/* Utilities */
-.hidden { display: none !important; }
-
-.error-msg {
-    color: #ef4444;
-    font-size: 13px;
-    text-align: center;
-    margin-top: 10px;
-    background: #fee2e2;
-    padding: 10px;
-    border-radius: 6px;
-}
-
-.spinner {
-    width: 24px;
-    height: 24px;
-    border: 3px solid #e2e8f0;
-    border-top: 3px solid #2563eb;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 10px auto;
-}
+/* Helpers */
+.hidden { display: none; }
 
 #loading {
     text-align: center;
-    color: #64748b;
-    font-size: 14px;
+    padding: 30px;
 }
 
-.result-count {
-    text-align: right;
-    font-size: 11px;
-    color: #94a3b8;
-    margin-top: 8px;
-    padding: 0 4px;
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
 }
 
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error {
+    color: #dc3545;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#resultCount {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 10px;
+}
