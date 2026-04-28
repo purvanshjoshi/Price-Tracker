@@ -53,7 +53,9 @@ public class RelianceScraper implements ScraperCallable {
                 org.openqa.selenium.JavascriptExecutor js = (org.openqa.selenium.JavascriptExecutor) driver;
                 js.executeScript("window.scrollBy(0,500)");
                 Thread.sleep(2000);
-            } catch (Exception e) {}
+            } catch (Exception e) {
+                // Ignore scroll error
+            }
 
             String wrapperSelector = SelectorConfig.get("reliance", "product_wrapper");
             wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wrapperSelector)));
@@ -69,12 +71,16 @@ public class RelianceScraper implements ScraperCallable {
                     if (!priceText.isEmpty()) {
                         price = Double.parseDouble(priceText);
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    // Ignore price error
+                }
 
                 String productLink = url;
                 try {
                     productLink = firstResult.findElement(By.cssSelector(SelectorConfig.get("reliance", "link"))).getAttribute("href");
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    // Ignore link error
+                }
 
                 return new Product(title, price, "Reliance Digital", productLink);
             }

@@ -62,7 +62,9 @@ public class AmazonScraper implements ScraperCallable {
                 try {
                     WebElement titleEl = firstResult.findElement(By.cssSelector("h2"));
                     title = titleEl.getText();
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    // Ignore missing title
+                }
 
                 // Price
                 String priceSelector = SelectorConfig.get("amazon", "price");
@@ -72,14 +74,18 @@ public class AmazonScraper implements ScraperCallable {
                     if (!priceText.isEmpty()) {
                         price = Double.parseDouble(priceText);
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    // Ignore price parsing errors
+                }
 
                 // Link
                 String productLink = url;
                 try {
                     WebElement linkEl = firstResult.findElement(By.cssSelector("h2 a"));
                     productLink = linkEl.getAttribute("href");
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    // Ignore link retrieval errors
+                }
 
                 return new Product(title, price, "Amazon", productLink);
             }
