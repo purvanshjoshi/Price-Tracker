@@ -63,12 +63,16 @@ public class FlipkartScraper implements ScraperCallable {
                     if (!priceText.isEmpty()) {
                         price = Double.parseDouble(priceText);
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    // Ignore price error
+                }
 
                 String productLink = url;
                 try {
                     productLink = firstResult.findElement(By.cssSelector(SelectorConfig.get("flipkart", "link"))).getAttribute("href");
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                    // Ignore link error
+                }
 
                 return new Product(title, price, "Flipkart", productLink);
             }

@@ -13,6 +13,7 @@ import java.util.Collection;
 public class ApiServer {
 
     private static final Gson gson = new Gson();
+    private static final EngineManager engine = new EngineManager();
 
     public static void start() {
         // Hugging Face Spaces use port 7860 by default
@@ -56,7 +57,6 @@ public class ApiServer {
             System.out.println("Cloud API: Searching for " + sanitizedQuery);
             
             // Trigger our existing EngineManager logic
-            EngineManager engine = new EngineManager();
             Collection<Product> results = engine.executeSearch(sanitizedQuery).values();
             
             return gson.toJson(results);

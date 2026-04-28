@@ -23,6 +23,14 @@ public class HttpUtils {
     private static final Map<String, Map<String, String>> SESSION_COOKIES = new HashMap<>();
 
     public static Connection connect(String url) {
+        // SSRF Validation for CodeQL
+        if (url == null || (!url.startsWith("https://www.amazon.in") && 
+                           !url.startsWith("https://www.flipkart.com") &&
+                           !url.startsWith("https://www.reliancedigital.in") &&
+                           !url.startsWith("https://www.croma.com"))) {
+            throw new IllegalArgumentException("Unauthorized URL domain: " + url);
+        }
+
         String baseDomain = url.contains("amazon") ? "https://www.amazon.in" : "https://www.flipkart.com";
         String userAgent = DESKTOP_USER_AGENTS[RANDOM.nextInt(DESKTOP_USER_AGENTS.length)];
         
