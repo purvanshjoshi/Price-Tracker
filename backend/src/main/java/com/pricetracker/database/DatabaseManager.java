@@ -30,7 +30,7 @@ public class DatabaseManager {
              Statement stmt = conn.createStatement()) {
             stmt.execute(createTableSQL);
             System.err.println("SQLite Database initialized at backend/price_history.db");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("Error initializing SQLite: " + e.getMessage());
         }
     }
@@ -47,7 +47,7 @@ public class DatabaseManager {
             pstmt.setString(4, product.getUrl());
 
             pstmt.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println("Database Error (SQLite): " + e.getMessage());
         }
     }
