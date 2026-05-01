@@ -27,30 +27,23 @@ public class FlipkartScraper implements ScraperCallable {
     public Product scrape(String keyword) {
         WebDriver driver = null;
         try {
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless=new");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--window-size=1920,1080");
-            options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
-
-            // Stealth settings
-            options.addArguments("--disable-blink-features=AutomationControlled");
-            options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-            options.setExperimentalOption("useAutomationExtension", false);
-
-            driver = new ChromeDriver(options);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+            // 1. Setup Stealth Driver
+            driver = com.pricetracker.engine.WebDriverFactory.createStealthDriver();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
 
             String encodedQuery = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
             String url = "https://www.flipkart.com/search?q=" + encodedQuery;
             driver.get(url);
 
-            // Wait for products to load
+            // 2. Diagnostics on failure
             String wrapperSelector = SelectorConfig.get("flipkart", "product_wrapper");
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wrapperSelector)));
+            try {
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wrapperSelector)));
+            } catch (Exception e) {
+                System.err.println("[Flipkart] Failed to find results. Page Title: " + driver.getTitle());
+                System.err.println("[Flipkart] URL: " + driver.getCurrentUrl());
+                throw e;
+            }
 
             WebElement firstResult = driver.findElement(By.cssSelector(wrapperSelector));
             
