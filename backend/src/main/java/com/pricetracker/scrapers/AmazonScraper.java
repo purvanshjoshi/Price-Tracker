@@ -27,32 +27,33 @@ public class AmazonScraper implements ScraperCallable {
     public Product scrape(String keyword) {
         WebDriver driver = null;
         try {
-            // 1. Setup Headless Chrome
-            WebDriverManager.chromedriver().setup();
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless=new"); // Use new headless mode
-            options.addArguments("--disable-gpu");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-            options.addArguments("--window-size=1920,1080");
-            options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
-
-            // Stealth settings
-            options.addArguments("--disable-blink-features=AutomationControlled");
-            options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-            options.setExperimentalOption("useAutomationExtension", false);
-
-            driver = new ChromeDriver(options);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            // 1. Setup Stealth Driver
+            driver = com.pricetracker.engine.WebDriverFactory.createStealthDriver();
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
             // 2. Navigate to Amazon
             String encodedQuery = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
             String url = "https://www.amazon.in/s?k=" + encodedQuery;
+            
+            // Random delay to mimic human behavior
+            Thread.sleep(1000 + new java.util.Random().nextInt(2000));
+            
             driver.get(url);
 
-            // 3. Wait for products to load
+            // 3. Wait for products to load with diagnostics
             String wrapperSelector = SelectorConfig.get("amazon", "product_wrapper");
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wrapperSelector)));
+            try {
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wrapperSelector)));
+            } catch (Exception e) {
+                System.err.println("[Amazon] Failed to find results. Page Title: " + driver.getTitle());
+                System.err.println("[Amazon] URL: " + driver.getCurrentUrl());
+                // Optional: Print a bit of page source for debugging
+                String source = driver.getPageSource();
+                if (source.contains("captcha") || source.contains("Robot Check")) {
+                    System.err.println("[Amazon] Bot detection triggered!");
+                }
+                throw e;
+            }
 
             WebElement firstResult = driver.findElement(By.cssSelector(wrapperSelector));
             
