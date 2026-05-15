@@ -4,11 +4,17 @@ import com.pricetracker.database.DatabaseManager;
 import com.pricetracker.model.Product;
 import com.pricetracker.scrapers.AmazonScraper;
 import com.pricetracker.scrapers.FlipkartScraper;
+import com.pricetracker.scrapers.RelianceScraper;
+import com.pricetracker.scrapers.CromaScraper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class EngineManager {
 
@@ -34,13 +40,15 @@ public class EngineManager {
             // 1. Prepare Scraper tasks
             Callable<Product> amazonTask = new AmazonScraper(searchKeyword);
             Callable<Product> flipkartTask = new FlipkartScraper(searchKeyword);
-            // Example for future extension:
-            // Callable<Product> chromaTask = new ChromaScraper(searchKeyword);
+            Callable<Product> relianceTask = new RelianceScraper(searchKeyword);
+            Callable<Product> cromaTask = new CromaScraper(searchKeyword);
 
             // 2. Submit tasks to the Executor (they start running simultaneously right now!)
             List<Future<Product>> futures = new ArrayList<>();
             futures.add(executorService.submit(amazonTask));
             futures.add(executorService.submit(flipkartTask));
+            futures.add(executorService.submit(relianceTask));
+            futures.add(executorService.submit(cromaTask));
             
             // 3. Wait for the threads to finish and collect results
             for (Future<Product> future : futures) {

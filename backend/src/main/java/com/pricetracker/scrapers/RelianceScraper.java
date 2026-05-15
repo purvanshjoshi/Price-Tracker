@@ -15,11 +15,11 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
-public class FlipkartScraper implements ScraperCallable {
+public class RelianceScraper implements ScraperCallable {
 
     private final String searchKeyword;
 
-    public FlipkartScraper(String searchKeyword) {
+    public RelianceScraper(String searchKeyword) {
         this.searchKeyword = searchKeyword;
     }
 
@@ -29,30 +29,30 @@ public class FlipkartScraper implements ScraperCallable {
         try {
             // 1. Setup Stealth Driver
             driver = com.pricetracker.engine.WebDriverFactory.createStealthDriver();
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
             String encodedQuery = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
-            String url = "https://www.flipkart.com/search?q=" + encodedQuery;
+            String url = "https://www.reliancedigital.in/search?q=" + encodedQuery;
             driver.get(url);
 
             // 2. Diagnostics on failure
-            String wrapperSelector = SelectorConfig.get("flipkart", "product_wrapper");
+            String wrapperSelector = SelectorConfig.get("reliance", "product_wrapper");
             try {
                 wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wrapperSelector)));
             } catch (Exception e) {
-                System.err.println("[Flipkart] Failed to find results. Page Title: " + driver.getTitle());
-                System.err.println("[Flipkart] URL: " + driver.getCurrentUrl());
+                System.err.println("[Reliance] Failed to find results. Page Title: " + driver.getTitle());
+                System.err.println("[Reliance] URL: " + driver.getCurrentUrl());
                 throw e;
             }
 
             WebElement firstResult = driver.findElement(By.cssSelector(wrapperSelector));
             
             if (firstResult != null) {
-                String title = firstResult.findElement(By.cssSelector(SelectorConfig.get("flipkart", "title"))).getText();
+                String title = firstResult.findElement(By.cssSelector(SelectorConfig.get("reliance", "title"))).getText();
                 
                 double price = Double.MAX_VALUE;
                 try {
-                    String priceText = firstResult.findElement(By.cssSelector(SelectorConfig.get("flipkart", "price"))).getText().replaceAll("[^0-9.]", "");
+                    String priceText = firstResult.findElement(By.cssSelector(SelectorConfig.get("reliance", "price"))).getText().replaceAll("[^0-9.]", "");
                     if (!priceText.isEmpty()) {
                         price = Double.parseDouble(priceText);
                     }
@@ -62,23 +62,23 @@ public class FlipkartScraper implements ScraperCallable {
 
                 String productLink = url;
                 try {
-                    productLink = firstResult.findElement(By.cssSelector(SelectorConfig.get("flipkart", "link"))).getAttribute("href");
+                    productLink = firstResult.findElement(By.cssSelector(SelectorConfig.get("reliance", "link"))).getAttribute("href");
                 } catch (Exception e) {
                     // Ignore link error
                 }
 
-                return new Product(title, price, "Flipkart", productLink);
+                return new Product(title, price, "Reliance Digital", productLink);
             }
 
         } catch (Exception e) {
-            System.err.println("Flipkart Selenium Scraper Failed: " + e.getMessage());
+            System.err.println("Reliance Selenium Scraper Failed: " + e.getMessage());
         } finally {
             if (driver != null) {
                 driver.quit();
             }
         }
 
-        return new Product(keyword + " (Not Found)", Double.MAX_VALUE, "Flipkart", "");
+        return new Product(keyword + " (Not Found)", Double.MAX_VALUE, "Reliance Digital", "");
     }
 
     @Override

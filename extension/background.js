@@ -3,22 +3,21 @@
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.type === 'SEARCH' && message.query) {
 
-        // This is the magical Native Messaging call that wakes up our Java Engine!
-        // We pass the name of the host configuration file we will create in Phase 7.
-        chrome.runtime.sendNativeMessage(
-            'com.pricetracker.engine',
-            { query: message.query },
-            function (response) {
-                if (chrome.runtime.lastError) {
-                    // This happens if the Java Engine isn't running or the registry key is missing
-                    console.error("Native Messaging Error: ", chrome.runtime.lastError.message);
-                    sendResponse({ error: "Cannot connect to Java Engine. Is the Host registered?" });
-                } else {
-                    console.log("Received native response:", response);
-                    sendResponse(response);
-                }
-            }
-        );
+        // Connecting to your live Hugging Face Space!
+        const API_BASE_URL = "https://purvansh01-price-scout.hf.space/api/search?q=";
+        const CLOUD_API_URL = API_BASE_URL + encodeURIComponent(message.query);
+
+        fetch(CLOUD_API_URL)
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received Cloud API response:", data);
+                // The extension UI expects { results: [...] }
+                sendResponse({ results: data });
+            })
+            .catch(error => {
+                console.error("Cloud API Error: ", error);
+                sendResponse({ error: "Cannot connect to Price Scout Cloud. Is the server running?" });
+            });
 
         // Return true to indicate we wish to send a response asynchronously 
         // (because Native Messaging takes a second to reply)

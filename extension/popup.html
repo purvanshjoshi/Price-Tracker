@@ -2,59 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price Tracker</title>
+    <title>Price Scout</title>
     <link rel="stylesheet" href="popup.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="logo">🛒 Price Scout</div>
-            <div class="subtitle">Built by Avengers</div>
+            <h1>Price Scout</h1>
+            <p>Cloud-Engine Intelligence</p>
         </header>
 
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search for a product (e.g., iPhone 15)..." autofocus>
-            <button id="searchBtn">Track Prices</button>
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="Search product name..." autofocus>
+            <button id="searchBtn">Search</button>
         </div>
 
         <div id="loading" class="hidden">
             <div class="spinner"></div>
-            <p>Scraping deals concurrently...</p>
+            <p>Scouting stores...</p>
         </div>
 
-        <div id="resultsContainer" class="hidden">
-            <!-- Controls: Sort + Filter -->
-            <div class="results-controls">
-                <select id="sortSelect" title="Sort results">
-                    <option value="cheapest">Cheapest First</option>
-                    <option value="priciest">Priciest First</option>
-                    <option value="platform-az">Platform A–Z</option>
-                    <option value="platform-za">Platform Z–A</option>
-                </select>
-                <input type="text" id="filterInput" placeholder="Filter results..." title="Real-time filter">
-            </div>
+        <div id="error" class="error hidden"></div>
 
-            <table>
+        <div id="resultsContainer" class="hidden">
+            <div class="controls">
+                <select id="sortSelect">
+                    <option value="cheapest">Price: Low to High</option>
+                    <option value="priciest">Price: High to Low</option>
+                    <option value="platform-az">Store: A-Z</option>
+                </select>
+                <input type="text" id="filterInput" placeholder="Filter results...">
+            </div>
+            
+            <p id="resultCount"></p>
+
+            <table id="resultsTable">
                 <thead>
                     <tr>
-                        <th>Platform</th>
-                        <th>Product Details</th>
+                        <th>Store</th>
+                        <th>Product</th>
                         <th>Price</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="resultsBody">
-                    <!-- Dynamic rows will be inserted here by JavaScript -->
+                    <!-- Results injected here -->
                 </tbody>
             </table>
-            <div id="resultCount" class="result-count"></div>
         </div>
-        
-        <div id="error" class="hidden error-msg"></div>
     </div>
-
     <script src="popup.js"></script>
 </body>
 </html>

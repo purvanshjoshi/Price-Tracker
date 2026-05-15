@@ -15,11 +15,11 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 
-public class FlipkartScraper implements ScraperCallable {
+public class CromaScraper implements ScraperCallable {
 
     private final String searchKeyword;
 
-    public FlipkartScraper(String searchKeyword) {
+    public CromaScraper(String searchKeyword) {
         this.searchKeyword = searchKeyword;
     }
 
@@ -32,27 +32,27 @@ public class FlipkartScraper implements ScraperCallable {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(25));
 
             String encodedQuery = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
-            String url = "https://www.flipkart.com/search?q=" + encodedQuery;
+            String url = "https://www.croma.com/searchB?q=" + encodedQuery;
             driver.get(url);
 
             // 2. Diagnostics on failure
-            String wrapperSelector = SelectorConfig.get("flipkart", "product_wrapper");
+            String wrapperSelector = SelectorConfig.get("croma", "product_wrapper");
             try {
                 wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wrapperSelector)));
             } catch (Exception e) {
-                System.err.println("[Flipkart] Failed to find results. Page Title: " + driver.getTitle());
-                System.err.println("[Flipkart] URL: " + driver.getCurrentUrl());
+                System.err.println("[Croma] Failed to find results. Page Title: " + driver.getTitle());
+                System.err.println("[Croma] URL: " + driver.getCurrentUrl());
                 throw e;
             }
 
             WebElement firstResult = driver.findElement(By.cssSelector(wrapperSelector));
             
             if (firstResult != null) {
-                String title = firstResult.findElement(By.cssSelector(SelectorConfig.get("flipkart", "title"))).getText();
+                String title = firstResult.findElement(By.cssSelector(SelectorConfig.get("croma", "title"))).getText();
                 
                 double price = Double.MAX_VALUE;
                 try {
-                    String priceText = firstResult.findElement(By.cssSelector(SelectorConfig.get("flipkart", "price"))).getText().replaceAll("[^0-9.]", "");
+                    String priceText = firstResult.findElement(By.cssSelector(SelectorConfig.get("croma", "price"))).getText().replaceAll("[^0-9.]", "");
                     if (!priceText.isEmpty()) {
                         price = Double.parseDouble(priceText);
                     }
@@ -62,23 +62,23 @@ public class FlipkartScraper implements ScraperCallable {
 
                 String productLink = url;
                 try {
-                    productLink = firstResult.findElement(By.cssSelector(SelectorConfig.get("flipkart", "link"))).getAttribute("href");
+                    productLink = firstResult.findElement(By.cssSelector(SelectorConfig.get("croma", "link"))).getAttribute("href");
                 } catch (Exception e) {
                     // Ignore link error
                 }
 
-                return new Product(title, price, "Flipkart", productLink);
+                return new Product(title, price, "Croma", productLink);
             }
 
         } catch (Exception e) {
-            System.err.println("Flipkart Selenium Scraper Failed: " + e.getMessage());
+            System.err.println("Croma Selenium Scraper Failed: " + e.getMessage());
         } finally {
             if (driver != null) {
                 driver.quit();
             }
         }
 
-        return new Product(keyword + " (Not Found)", Double.MAX_VALUE, "Flipkart", "");
+        return new Product(keyword + " (Not Found)", Double.MAX_VALUE, "Croma", "");
     }
 
     @Override
