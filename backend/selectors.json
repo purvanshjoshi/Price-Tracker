@@ -6,9 +6,21 @@
     "link": "h2 a"
   },
   "flipkart": {
-    "product_wrapper": "a.k7wcnx",
-    "title": ".RG5Slk",
-    "price": ".hZ3P6w.DeU9vF",
+    "product_wrapper": "div[data-id]",
+    "title": ".KzDlHZ, .wP9_qG, ._75796a, .RG5Slk",
+    "price": ".Nx9bqj, .hZ3P6w.DeU9vF",
     "link": "a"
+  },
+  "reliance": {
+    "product_wrapper": ".product-card",
+    "title": ".product-card-title",
+    "price": ".price",
+    "link": "a.details-container"
+  },
+  "croma": {
+    "product_wrapper": ".cp-product",
+    "title": "h3.product-title a",
+    "price": ".amount",
+    "link": "h3.product-title a"
   }
 }
