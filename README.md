@@ -1,3 +1,13 @@
+---
+title: Price Scout
+emoji: 🔍
+colorFrom: blue
+colorTo: green
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 <div align="center">
   <img src="https://raw.githubusercontent.com/purvanshjoshi/Price-Tracker/master/extension/icons/logo.png" alt="Price Scout Logo" width="128" height="128">
   <h1>Price Scout: Advanced Price Discovery & Analytics Platform</h1>
