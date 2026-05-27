@@ -29,66 +29,98 @@ public class AmazonScraper implements ScraperCallable {
         try {
             // 1. Setup Stealth Driver
             driver = com.pricetracker.engine.WebDriverFactory.createStealthDriver();
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-            // 2. Navigate to Amazon
+            // 2. Visit homepage first to establish cookies and avoid 503 bot detection
+            driver.get("https://www.amazon.in/");
+            Thread.sleep(1500 + new java.util.Random().nextInt(1500));
+
+            // 3. Navigate to search URL
             String encodedQuery = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
             String url = "https://www.amazon.in/s?k=" + encodedQuery;
-            
-            // Random delay to mimic human behavior
-            Thread.sleep(1000 + new java.util.Random().nextInt(2000));
-            
             driver.get(url);
 
-            // 3. Wait for products to load with diagnostics
+            // 4. Wait for products to load with fallback selectors
             String wrapperSelector = SelectorConfig.get("amazon", "product_wrapper");
+            // Add fallback selector in case the primary one doesn't work
+            String combinedWrapper = wrapperSelector + ", .s-result-item[data-asin]:not([data-asin=''])";
+            
             try {
-                wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(wrapperSelector)));
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(combinedWrapper)));
             } catch (Exception e) {
                 System.err.println("[Amazon] Failed to find results. Page Title: " + driver.getTitle());
                 System.err.println("[Amazon] URL: " + driver.getCurrentUrl());
-                // Optional: Print a bit of page source for debugging
                 String source = driver.getPageSource();
                 if (source.contains("captcha") || source.contains("Robot Check")) {
                     System.err.println("[Amazon] Bot detection triggered!");
+                } else if (source.contains("503") || source.contains("Service Unavailable")) {
+                    System.err.println("[Amazon] 503 Service Unavailable - blocked by Amazon!");
                 }
                 throw e;
             }
 
-            WebElement firstResult = driver.findElement(By.cssSelector(wrapperSelector));
+            // 5. Get all matching result elements and iterate to find a valid one
+            java.util.List<WebElement> results = driver.findElements(By.cssSelector(combinedWrapper));
             
-            if (firstResult != null) {
-                // Title
-                String title = "Unknown Amazon Product";
-                try {
-                    WebElement titleEl = firstResult.findElement(By.cssSelector("h2"));
-                    title = titleEl.getText();
-                } catch (Exception e) {
-                    // Ignore missing title
-                }
+            String titleSelector = SelectorConfig.get("amazon", "title");
+            String priceSelector = SelectorConfig.get("amazon", "price");
+            String linkSelector = SelectorConfig.get("amazon", "link");
 
-                // Price
-                String priceSelector = SelectorConfig.get("amazon", "price");
-                double price = Double.MAX_VALUE;
+            for (WebElement result : results) {
                 try {
-                    String priceText = firstResult.findElement(By.cssSelector(priceSelector)).getText().replaceAll("[^0-9.]", "");
-                    if (!priceText.isEmpty()) {
-                        price = Double.parseDouble(priceText);
+                    // Title
+                    String title;
+                    try {
+                        title = result.findElement(By.cssSelector(titleSelector)).getText().trim();
+                    } catch (Exception e) {
+                        // Fallback: try h2 span
+                        try {
+                            title = result.findElement(By.cssSelector("h2 span")).getText().trim();
+                        } catch (Exception e2) {
+                            continue; // Skip this result, no title found
+                        }
                     }
-                } catch (Exception e) {
-                    // Ignore price parsing errors
-                }
+                    if (title.isEmpty()) continue;
 
-                // Link
-                String productLink = url;
-                try {
-                    WebElement linkEl = firstResult.findElement(By.cssSelector("h2 a"));
-                    productLink = linkEl.getAttribute("href");
-                } catch (Exception e) {
-                    // Ignore link retrieval errors
-                }
+                    // Price
+                    double price = Double.MAX_VALUE;
+                    try {
+                        String priceText = result.findElement(By.cssSelector(priceSelector))
+                                .getText().replaceAll("[^0-9.]", "");
+                        if (!priceText.isEmpty()) {
+                            price = Double.parseDouble(priceText);
+                        }
+                    } catch (Exception e) {
+                        // Try fallback price selectors
+                        try {
+                            String priceText = result.findElement(By.cssSelector(".a-price .a-offscreen"))
+                                    .getAttribute("textContent").replaceAll("[^0-9.]", "");
+                            if (!priceText.isEmpty()) {
+                                price = Double.parseDouble(priceText);
+                            }
+                        } catch (Exception e2) {
+                            continue; // Skip result without price
+                        }
+                    }
+                    if (price == Double.MAX_VALUE) continue;
 
-                return new Product(title, price, "Amazon", productLink);
+                    // Link
+                    String productLink = url;
+                    try {
+                        WebElement linkEl = result.findElement(By.cssSelector(linkSelector));
+                        String href = linkEl.getAttribute("href");
+                        if (href != null && !href.isEmpty()) {
+                            productLink = href;
+                        }
+                    } catch (Exception e) {
+                        // Keep the search URL as fallback
+                    }
+
+                    return new Product(title, price, "Amazon", productLink);
+                } catch (Exception e) {
+                    // This result failed, try the next one
+                    continue;
+                }
             }
 
         } catch (Exception e) {
