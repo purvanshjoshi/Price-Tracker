@@ -1,7 +1,7 @@
 {
   "amazon": {
     "product_wrapper": "div[data-component-type='s-search-result']",
-    "title": "h2 a span",
+    "title": "h2 a",
     "price": ".a-price-whole",
     "link": "h2 a"
   },
