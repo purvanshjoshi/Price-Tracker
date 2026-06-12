@@ -56,14 +56,45 @@ public class EngineManager {
                     // .get() will block until this specific thread is finished finding the price
                     Product result = future.get();
                     
-                    // We only want valid products (ignore errors marked as Double.MAX_VALUE)
-                    if (result != null && result.getPrice() < Double.MAX_VALUE) {
-                        
-                        // Insert the product into the TreeMap to automatically sort it
-                        sortedResults.put(result.getPrice(), result);
-                        
-                        // Save the permanent history directly to the MySQL database!
-                        databaseManager.savePriceHistory(result); 
+                    if (result != null) {
+                        if (result.getPrice() < Double.MAX_VALUE) {
+                            // Insert the product into the TreeMap to automatically sort it
+                            sortedResults.put(result.getPrice(), result);
+                            
+                            // Save the permanent history directly to the MySQL database!
+                            databaseManager.savePriceHistory(result); 
+                        } else {
+                            // Soft block or Parse Error - Trigger Python Intelligence Service Challenge Layer
+                            System.out.println("Fallback triggered for URL: " + result.getUrl());
+                            try {
+                                java.net.URL url = new java.net.URL("http://localhost:8000/v1/extract");
+                                java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+                                conn.setRequestMethod("POST");
+                                conn.setRequestProperty("Content-Type", "application/json");
+                                conn.setDoOutput(true);
+                                
+                                String jsonInputString = "{\"url\": \"" + result.getUrl() + "\"}";
+                                try(java.io.OutputStream os = conn.getOutputStream()) {
+                                    byte[] input = jsonInputString.getBytes("utf-8");
+                                    os.write(input, 0, input.length);
+                                }
+                                
+                                int code = conn.getResponseCode();
+                                if (code == 200) {
+                                    java.io.BufferedReader br = new java.io.BufferedReader(
+                                        new java.io.InputStreamReader(conn.getInputStream(), "utf-8"));
+                                    StringBuilder response = new StringBuilder();
+                                    String responseLine = null;
+                                    while ((responseLine = br.readLine()) != null) {
+                                        response.append(responseLine.trim());
+                                    }
+                                    System.out.println("Intelligence Service Response: " + response.toString());
+                                    // Normally we would deserialize to ExtractionResponse.java and retry
+                                }
+                            } catch (Exception apiEx) {
+                                System.err.println("Intelligence Service failed: " + apiEx.getMessage());
+                            }
+                        }
                     }
                 } catch (InterruptedException | ExecutionException e) {
                     System.err.println("Error retrieving scraper result: " + e.getMessage());
