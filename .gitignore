@@ -36,3 +36,12 @@ build/
 .env
 application-secret.properties
 *.log
+
+### Python Service ###
+__pycache__/
+*.py[cod]
+*.class
+.venv/
+env/
+.pytest_cache/
+
