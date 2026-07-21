@@ -40,6 +40,12 @@ public class ApiServer {
             response.type("application/json");
         });
 
+        // Health Endpoint: GET /api/health
+        get("/api/health", (req, res) -> {
+            res.status(200);
+            return gson.toJson(new HealthResponse("ok"));
+        });
+
         // Search Endpoint: GET /api/search?q=iphone
         get("/api/search", (req, res) -> {
             String query = req.queryParams("q");
@@ -83,5 +89,10 @@ public class ApiServer {
     private static class ErrorResponse {
         String error;
         ErrorResponse(String error) { this.error = error; }
+    }
+
+    private static class HealthResponse {
+        String status;
+        HealthResponse(String status) { this.status = status; }
     }
 }
