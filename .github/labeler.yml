@@ -1,15 +1,11 @@
 area:backend:
-  - changed-files:
-    - any-glob-to-any-file: ['backend/**/*']
+  - any: ['backend/**/*']
 
 area:extension:
-  - changed-files:
-    - any-glob-to-any-file: ['extension/**/*']
+  - any: ['extension/**/*']
 
 area:docs:
-  - changed-files:
-    - any-glob-to-any-file: ['*.md', 'docs/**/*']
+  - any: ['*.md', 'docs/**/*']
 
 area:github:
-  - changed-files:
-    - any-glob-to-any-file: ['.github/**/*']
+  - any: ['.github/**/*']
