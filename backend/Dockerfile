@@ -25,5 +25,9 @@ COPY selectors.json .
 ENV PORT=7860
 EXPOSE 7860
 
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:7860/api/health || exit 1
+
 # Command to run the API
 ENTRYPOINT ["java", "-jar", "app.jar"]
