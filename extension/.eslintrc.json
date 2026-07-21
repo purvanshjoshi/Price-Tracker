@@ -1,0 +1,16 @@
+{
+    "env": {
+        "browser": true,
+        "es2025": true,
+        "webextensions": true
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+        "no-console": "off",
+        "eqeqeq": ["error", "always"],
+        "curly": ["error", "all"],
+        "semi": ["error", "always"],
+        "quotes": ["error", "single", { "avoidEscape": true }]
+    }
+}
