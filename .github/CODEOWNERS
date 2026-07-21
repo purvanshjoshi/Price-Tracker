@@ -1,0 +1,121 @@
+# CODEOWNERS
+# Each line is a file pattern followed by one or more owners.
+# The last matching pattern takes precedence.
+# For more info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# =============================================================================
+# DEFAULT OWNERS
+# All files not matched by a more specific rule fall back to this.
+# =============================================================================
+* @purvanshjoshi
+
+# =============================================================================
+# ROOT-LEVEL FILES
+# =============================================================================
+/.gitignore               @purvanshjoshi
+/checkstyle.xml           @purvanshjoshi
+/mock_test_client.py      @purvanshjoshi
+
+# =============================================================================
+# DOCUMENTATION
+# =============================================================================
+/README.md                @purvanshjoshi
+/CONTRIBUTING.md          @purvanshjoshi
+/CODE_OF_CONDUCT.md       @purvanshjoshi
+/SECURITY.md              @purvanshjoshi
+/scrapegraph_rfc.md       @purvanshjoshi
+/docs/                    @purvanshjoshi
+
+# =============================================================================
+# PROPOSALS
+# =============================================================================
+/proposal/                @purvanshjoshi
+
+# =============================================================================
+# GITHUB CONFIGURATION (CI/CD, Templates, Automation)
+# =============================================================================
+/.github/                         @purvanshjoshi
+/.github/workflows/               @purvanshjoshi
+/.github/auto_assign.yml          @purvanshjoshi
+/.github/dependabot.yml           @purvanshjoshi
+/.github/labeler.yml              @purvanshjoshi
+/.github/pull_request_template.md @purvanshjoshi
+/.github/ISSUE_TEMPLATE/          @purvanshjoshi
+
+# =============================================================================
+# BACKEND — Java Maven Project (REST API, Scrapers, Database, Selenium Engine)
+# =============================================================================
+
+# Root backend configuration
+/backend/                       @purvanshjoshi
+/backend/pom.xml                @purvanshjoshi
+/backend/Dockerfile             @purvanshjoshi
+/backend/selectors.json         @purvanshjoshi
+
+# Backend — Entry point & REST API
+/backend/src/main/java/com/pricetracker/Main.java         @purvanshjoshi
+/backend/src/main/java/com/pricetracker/ApiServer.java    @purvanshjoshi
+
+# Backend — Database layer
+/backend/src/main/java/com/pricetracker/database/         @purvanshjoshi
+
+# Backend — Scraping engine & utilities
+/backend/src/main/java/com/pricetracker/engine/           @purvanshjoshi
+
+# Backend — Data model
+/backend/src/main/java/com/pricetracker/model/            @purvanshjoshi
+
+# Backend — Store-specific scrapers (Amazon, Flipkart, Croma, Reliance)
+/backend/src/main/java/com/pricetracker/scrapers/         @purvanshjoshi
+
+# =============================================================================
+# CHROME EXTENSION — Manifest V3 (Content Script, Popup, Service Worker)
+# =============================================================================
+
+# Extension root
+/extension/                     @purvanshjoshi
+
+# Extension — Manifest & entry points
+/extension/manifest.json        @purvanshjoshi
+/extension/background.js        @purvanshjoshi
+/extension/content.js           @purvanshjoshi
+
+# Extension — Popup UI
+/extension/popup.html           @purvanshjoshi
+/extension/popup.js             @purvanshjoshi
+/extension/popup.css            @purvanshjoshi
+
+# Extension — Injected styles
+/extension/content.css          @purvanshjoshi
+
+# Extension — Icons & assets
+/extension/icons/               @purvanshjoshi
+
+# =============================================================================
+# NATIVE MESSAGING HOST (Chrome <-> Java Bridge)
+# =============================================================================
+/host-config/                         @purvanshjoshi
+/host-config/com.pricetracker.engine.json @purvanshjoshi
+/host-config/engine_launcher.bat      @purvanshjoshi
+
+# =============================================================================
+# INFRASTRUCTURE & SETUP SCRIPTS (Registry fixes, build scripts)
+# =============================================================================
+/infrastructure/                      @purvanshjoshi
+/infrastructure/scripts/              @purvanshjoshi
+/infrastructure/scripts/fix_registry.reg   @purvanshjoshi
+/infrastructure/scripts/install_build.ps1 @purvanshjoshi
+
+# =============================================================================
+# INTELLIGENCE SERVICE — Python (FastAPI, Playwright, planned/scaffolded)
+# =============================================================================
+/intelligence-service/                    @purvanshjoshi
+/intelligence-service/requirements.txt    @purvanshjoshi
+
+# =============================================================================
+# SECURITY-SENSITIVE FILES
+# Changes here should be carefully reviewed
+# =============================================================================
+/backend/price_history.db         @purvanshjoshi
+/SECURITY.md                      @purvanshjoshi
+/.github/workflows/codeql.yml     @purvanshjoshi
