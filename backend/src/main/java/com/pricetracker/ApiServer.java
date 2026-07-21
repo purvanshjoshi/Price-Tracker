@@ -4,6 +4,8 @@ import static spark.Spark.get;
 import static spark.Spark.port;
 import static spark.Spark.before;
 import static spark.Spark.options;
+import static spark.Spark.exception;
+import static spark.Spark.notFound;
 
 import com.google.gson.Gson;
 import com.pricetracker.engine.EngineManager;
@@ -38,6 +40,18 @@ public class ApiServer {
         before((request, response) -> {
             response.header("Access-Control-Allow-Origin", "*");
             response.type("application/json");
+        });
+
+        // Global error handler for unhandled exceptions
+        exception(Exception.class, (exc, req, res) -> {
+            res.status(500);
+            res.body(gson.toJson(new ErrorResponse("Internal server error")));
+        });
+
+        // 404 handler for unmatched routes
+        notFound((req, res) -> {
+            res.type("application/json");
+            return gson.toJson(new ErrorResponse("Not found"));
         });
 
         // Health Endpoint: GET /api/health
