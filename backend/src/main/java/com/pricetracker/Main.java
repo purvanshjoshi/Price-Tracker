@@ -1,10 +1,18 @@
 package com.pricetracker;
 
+import com.pricetracker.database.MigrationRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Main {
+
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
-        System.out.println("--- Price Scout Cloud Engine Launching ---");
-        
-        // Start the Web API Server
+        log.info("Price Scout Cloud Engine launching");
+
+        MigrationRunner.migrate();
+
         ApiServer.start();
     }
 
