@@ -11,9 +11,12 @@ import com.google.gson.Gson;
 import com.pricetracker.engine.EngineManager;
 import com.pricetracker.model.Product;
 import java.util.Collection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ApiServer {
 
+    private static final Logger log = LoggerFactory.getLogger(ApiServer.class);
     private static final Gson gson = new Gson();
     private static final EngineManager engine = new EngineManager();
 
@@ -74,7 +77,7 @@ public class ApiServer {
                 sanitizedQuery = sanitizedQuery.substring(0, 100);
             }
 
-            System.out.println("Cloud API: Searching for " + sanitizedQuery);
+            log.info("Searching for {}", sanitizedQuery);
             
             // Trigger our existing EngineManager logic
             Collection<Product> results = engine.executeSearch(sanitizedQuery).values();
@@ -90,14 +93,14 @@ public class ApiServer {
                 return gson.toJson(new ErrorResponse("Product title is required."));
             }
 
-            System.out.println("Cloud API: Fetching history for " + title);
+            log.info("Fetching history for {}", title);
             
             // We'll update PriceHistoryDAO to support this
             com.pricetracker.engine.PriceHistoryDAO dao = new com.pricetracker.engine.PriceHistoryDAO();
             return gson.toJson(dao.getHistory(title));
         });
 
-        System.out.println("Price Scout Cloud API started on port: " + port);
+        log.info("Price Scout Cloud API started on port {}", port);
     }
 
     private static class ErrorResponse {

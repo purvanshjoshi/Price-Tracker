@@ -74,11 +74,11 @@
             <version>2.14.0</version>
         </dependency>
 
-        <!-- Logging for Spark -->
+        <!-- Structured Logging (SLF4J + Logback) -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.18</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.5.18</version>
         </dependency>
     </dependencies>
 
