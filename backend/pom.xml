@@ -41,7 +41,7 @@
         <!-- Unit Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
+            <artifactId>junit-jupiter</artifactId>
             <version>6.1.2</version>
             <scope>test</scope>
         </dependency>
@@ -84,6 +84,12 @@
 
     <build>
         <plugins>
+            <!-- Maven Surefire Plugin for running tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.3</version>
+            </plugin>
             <!-- Maven Assembly Plugin to create a Fat JAR with dependencies -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
