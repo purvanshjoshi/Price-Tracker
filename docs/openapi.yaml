@@ -1,0 +1,134 @@
+openapi: "3.0.3"
+info:
+  title: Price Scout API
+  description: REST API for the Price Scout price comparison engine. Provides product search across multiple e-commerce platforms and historical price tracking.
+  version: "1.0.0"
+  contact:
+    name: Purvansh Joshi
+servers:
+  - url: http://localhost:7860
+    description: Local development
+  - url: https://{username}.us-east-1.aws.cloud.digitalocean.app
+    description: Production
+    variables:
+      username:
+        default: api
+
+paths:
+  /api/health:
+    get:
+      summary: Health check
+      description: Returns the server status. Used by Docker HEALTHCHECK and orchestrators.
+      operationId: healthCheck
+      responses:
+        "200":
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+
+  /api/search:
+    get:
+      summary: Search products
+      description: Searches for a product across Amazon, Flipkart, Croma, and Reliance Digital.
+      operationId: searchProducts
+      parameters:
+        - name: q
+          in: query
+          required: true
+          description: Product search query
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      responses:
+        "200":
+          description: List of products from all platforms
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "400":
+          description: Missing or invalid search query
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/history:
+    get:
+      summary: Get price history
+      description: Retrieves stored price history for a given product title.
+      operationId: getPriceHistory
+      parameters:
+        - name: title
+          in: query
+          required: true
+          description: Product title to look up
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Price history records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PriceRecord"
+        "400":
+          description: Missing product title
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "iPhone 15"
+        price:
+          type: number
+          format: double
+          example: 79999.0
+        platform:
+          type: string
+          example: "Amazon"
+        url:
+          type: string
+          format: uri
+          example: "https://amazon.in/dp/xyz"
+
+    PriceRecord:
+      type: object
+      properties:
+        product_name:
+          type: string
+        platform:
+          type: string
+        price:
+          type: number
+          format: double
+        url:
+          type: string
+        scraped_at:
+          type: string
+          format: date-time
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Search query 'q' is required."
