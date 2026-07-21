@@ -1,0 +1,6 @@
+target/
+price_history.db
+*.log
+.idea/
+*.iml
+.vscode/
