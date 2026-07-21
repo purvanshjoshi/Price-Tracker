@@ -7,7 +7,7 @@ class SelectorConfigTest {
 
     @Test
     void getReturnsSelectorForKnownSiteAndField() {
-        String selector = SelectorConfig.get("amazon", "container");
+        String selector = SelectorConfig.get("amazon", "title");
         assertNotNull(selector);
         assertFalse(selector.isEmpty());
     }
