@@ -1,0 +1,33 @@
+[changelog]
+header = """
+# Changelog
+
+All notable changes to **Price Scout** are documented here.
+
+"""
+body = """
+{% for group, commits in commits | group_by(attribute="group") %}
+### {{ group | upper_first }}
+{% for commit in commits %}
+- {{ commit.message | upper_first }}{% if commit.github.username %} by @{{ commit.github.username }}{% endif %}
+{% endfor %}
+{% endfor %}
+"""
+trim = true
+
+[git]
+conventional_commits = true
+commit_parsers = [
+  { message = "^feat", group = "Features" },
+  { message = "^fix", group = "Bug Fixes" },
+  { message = "^docs", group = "Documentation" },
+  { message = "^style", group = "Styling" },
+  { message = "^refactor", group = "Code Refactoring" },
+  { message = "^perf", group = "Performance Improvements" },
+  { message = "^test", group = "Tests" },
+  { message = "^build", group = "Build System" },
+  { message = "^ci", group = "Continuous Integration" },
+  { message = "^chore", group = "Chores" },
+  { message = "^revert", group = "Reverts" },
+]
+filter_commits = true
