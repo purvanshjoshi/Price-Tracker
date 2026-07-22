@@ -113,7 +113,7 @@ public class MigrationRunner {
                 LOG.info("Applied migration: {} ({})", migration.fileName, migration.version);
             }
         } catch (Exception e) {
-            log.error("Failed to apply migration: {}", migration.fileName, e);
+            LOG.error("Failed to apply migration: {}", migration.fileName, e);
             throw new RuntimeException("Migration failed: " + migration.fileName, e);
         }
     }
