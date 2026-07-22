@@ -16,9 +16,9 @@ import org.slf4j.LoggerFactory;
 
 public class ApiServer {
 
-    private static final Logger log = LoggerFactory.getLogger(ApiServer.class);
-    private static final Gson gson = new Gson();
-    private static final EngineManager engine = new EngineManager();
+    private static final Logger LOG = LoggerFactory.getLogger(ApiServer.class);
+    private static final Gson GSON = new Gson();
+    private static final EngineManager ENGINE = new EngineManager();
 
     public static void start() {
         // Hugging Face Spaces use port 7860 by default
@@ -48,19 +48,19 @@ public class ApiServer {
         // Global error handler for unhandled exceptions
         exception(Exception.class, (exc, req, res) -> {
             res.status(500);
-            res.body(gson.toJson(new ErrorResponse("Internal server error")));
+            res.body(GSON.toJson(new ErrorResponse("Internal server error")));
         });
 
         // 404 handler for unmatched routes
         notFound((req, res) -> {
             res.type("application/json");
-            return gson.toJson(new ErrorResponse("Not found"));
+            return GSON.toJson(new ErrorResponse("Not found"));
         });
 
         // Health Endpoint: GET /api/health
         get("/api/health", (req, res) -> {
             res.status(200);
-            return gson.toJson(new HealthResponse("ok"));
+            return GSON.toJson(new HealthResponse("ok"));
         });
 
         // Search Endpoint: GET /api/search?q=iphone
@@ -68,7 +68,7 @@ public class ApiServer {
             String query = req.queryParams("q");
             if (query == null || query.isEmpty()) {
                 res.status(400);
-                return gson.toJson(new ErrorResponse("Search query 'q' is required."));
+                return GSON.toJson(new ErrorResponse("Search query 'q' is required."));
             }
 
             // Security Sanitization for CodeQL
@@ -77,12 +77,11 @@ public class ApiServer {
                 sanitizedQuery = sanitizedQuery.substring(0, 100);
             }
 
-            log.info("Searching for {}", sanitizedQuery);
+            LOG.info("Searching for {}", sanitizedQuery);
             
-            // Trigger our existing EngineManager logic
-            Collection<Product> results = engine.executeSearch(sanitizedQuery).values();
+            Collection<Product> results = ENGINE.executeSearch(sanitizedQuery).values();
             
-            return gson.toJson(results);
+            return GSON.toJson(results);
         });
 
         // History Endpoint: GET /api/history?title=...
@@ -90,17 +89,16 @@ public class ApiServer {
             String title = req.queryParams("title");
             if (title == null || title.isEmpty()) {
                 res.status(400);
-                return gson.toJson(new ErrorResponse("Product title is required."));
+                return GSON.toJson(new ErrorResponse("Product title is required."));
             }
 
-            log.info("Fetching history for {}", title);
+            LOG.info("Fetching history for {}", title);
             
-            // We'll update PriceHistoryDAO to support this
             com.pricetracker.engine.PriceHistoryDAO dao = new com.pricetracker.engine.PriceHistoryDAO();
-            return gson.toJson(dao.getHistory(title));
+            return GSON.toJson(dao.getHistory(title));
         });
 
-        log.info("Price Scout Cloud API started on port {}", port);
+        LOG.info("Price Scout Cloud API started on port {}", port);
     }
 
     private static class ErrorResponse {

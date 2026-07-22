@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 
 public class MigrationRunner {
 
-    private static final Logger log = LoggerFactory.getLogger(MigrationRunner.class);
+    private static final Logger LOG = LoggerFactory.getLogger(MigrationRunner.class);
     private static final String DB_URL = "jdbc:sqlite:price_history.db";
     private static final String MIGRATIONS_DIR = "migrations/";
 
@@ -32,7 +32,7 @@ public class MigrationRunner {
         }
 
         if (pending.isEmpty()) {
-            log.info("No pending database migrations");
+            LOG.info("No pending database migrations");
         }
     }
 
@@ -58,7 +58,7 @@ public class MigrationRunner {
                 versions.add(rs.getString("version"));
             }
         } catch (Exception e) {
-            log.error("Failed to read applied migrations", e);
+            LOG.error("Failed to read applied migrations", e);
         }
         return versions;
     }
@@ -83,7 +83,7 @@ public class MigrationRunner {
                 }
             }
         } catch (Exception e) {
-            log.error("Failed to list migration files", e);
+            LOG.error("Failed to list migration files", e);
         }
         return pending;
     }
@@ -93,7 +93,7 @@ public class MigrationRunner {
             InputStream is = MigrationRunner.class.getClassLoader()
                     .getResourceAsStream(MIGRATIONS_DIR + migration.fileName);
             if (is == null) {
-                log.error("Migration file not found: {}", migration.fileName);
+                LOG.error("Migration file not found: {}", migration.fileName);
                 return;
             }
             String sql = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))
@@ -110,10 +110,10 @@ public class MigrationRunner {
                     ps.executeUpdate();
                 }
                 conn.commit();
-                log.info("Applied migration: {} ({})", migration.fileName, migration.version);
+                LOG.info("Applied migration: {} ({})", migration.fileName, migration.version);
             }
         } catch (Exception e) {
-            log.error("Failed to apply migration: {}", migration.fileName, e);
+            LOG.error("Failed to apply migration: {}", migration.fileName, e);
             throw new RuntimeException("Migration failed: " + migration.fileName, e);
         }
     }
