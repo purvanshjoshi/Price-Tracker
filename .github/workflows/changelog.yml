@@ -48,7 +48,8 @@ jobs:
           git commit -m "chore: update changelog"
           git push origin "$BRANCH" --force
 
-          if PR_URL=$(gh pr view "$BRANCH" --json url --jq '.url' 2>/dev/null); then
+          PR_URL=$(gh pr list --head "$BRANCH" --state open --json url --jq '.[0].url' 2>/dev/null)
+          if [ -n "$PR_URL" ]; then
             echo "PR already exists: $PR_URL"
           else
             gh pr create \
