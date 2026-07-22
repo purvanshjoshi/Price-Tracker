@@ -37,7 +37,8 @@ public class HttpUtils {
         // 1. Random delay to mimic human behavior (2-4 seconds)
         try {
             Thread.sleep(2000 + RANDOM.nextInt(2000));
-        } catch (InterruptedException ignored) {}
+        } catch (InterruptedException ignored) {
+        }
 
         // 2. Fetch session cookies if not already present for this domain
         if (!SESSION_COOKIES.containsKey(baseDomain)) {
