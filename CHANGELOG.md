@@ -162,6 +162,10 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump sqlite-jdbc from 3.53.2.0 to 3.53.2.1 in /backend by @purvanshjoshi
 
+- Bump ch.qos.logback:logback-classic in /backend by @dependabot[bot]
+
+- Bump logback-classic from 1.5.38 to 1.6.0 by @purvanshjoshi
+
 
 ### Chores
 
@@ -192,6 +196,8 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog by @github-actions[bot]
 
 - Update changelog by @purvanshjoshi
+
+- Update changelog by @github-actions[bot]
 
 
 ### Continuous Integration
