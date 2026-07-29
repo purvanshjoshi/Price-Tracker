@@ -166,6 +166,14 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump logback-classic from 1.5.38 to 1.6.0 by @purvanshjoshi
 
+- Bump actions/labeler from 6 to 7 by @dependabot[bot]
+
+- Bump actions/labeler from 6 to 7 by @purvanshjoshi
+
+- Bump ch.qos.logback:logback-classic in /backend by @dependabot[bot]
+
+- Bump logback-classic from 1.6.0 to 1.6.1 by @purvanshjoshi
+
 
 ### Chores
 
@@ -196,6 +204,8 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog by @github-actions[bot]
 
 - Update changelog by @purvanshjoshi
+
+- Update changelog by @github-actions[bot]
 
 - Update changelog by @github-actions[bot]
 
