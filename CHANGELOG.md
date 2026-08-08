@@ -178,6 +178,10 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump jsoup from 1.22.2 to 1.23.1 by @purvanshjoshi
 
+- Bump actions/stale from 10 to 11 by @dependabot[bot]
+
+- Bump actions/stale from 10 to 11 by @purvanshjoshi
+
 
 ### Chores
 
@@ -234,6 +238,8 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog by @github-actions[bot]
 
 - Update changelog by @purvanshjoshi
+
+- Update changelog by @github-actions[bot]
 
 
 ### Continuous Integration
