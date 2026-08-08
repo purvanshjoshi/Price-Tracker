@@ -174,6 +174,10 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump logback-classic from 1.6.0 to 1.6.1 by @purvanshjoshi
 
+- Bump org.jsoup:jsoup from 1.22.2 to 1.23.1 in /backend by @dependabot[bot]
+
+- Bump jsoup from 1.22.2 to 1.23.1 by @purvanshjoshi
+
 
 ### Chores
 
@@ -226,6 +230,10 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog by @github-actions[bot]
 
 - Update changelog by @github-actions[bot]
+
+- Update changelog by @github-actions[bot]
+
+- Update changelog by @purvanshjoshi
 
 
 ### Continuous Integration
