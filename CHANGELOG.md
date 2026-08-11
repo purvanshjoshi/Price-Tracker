@@ -182,6 +182,10 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump actions/stale from 10 to 11 by @purvanshjoshi
 
+- Bump org.junit.jupiter:junit-jupiter in /backend by @dependabot[bot]
+
+- Bump junit-jupiter from 6.1.2 to 6.1.3 by @purvanshjoshi
+
 
 ### Chores
 
@@ -244,6 +248,10 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog by @github-actions[bot]
 
 - Update changelog by @github-actions[bot]
+
+- Update changelog by @github-actions[bot]
+
+- Update changelog by @purvanshjoshi
 
 
 ### Continuous Integration
