@@ -186,6 +186,10 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump junit-jupiter from 6.1.2 to 6.1.3 by @purvanshjoshi
 
+- Bump org.seleniumhq.selenium:selenium-java in /backend by @dependabot[bot]
+
+- Bump selenium-java from 4.46.0 to 4.47.0 by @purvanshjoshi
+
 
 ### Chores
 
@@ -252,6 +256,8 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog by @github-actions[bot]
 
 - Update changelog by @purvanshjoshi
+
+- Update changelog by @github-actions[bot]
 
 - Update changelog by @github-actions[bot]
 
