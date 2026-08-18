@@ -271,6 +271,8 @@ All notable changes to **Price Scout** are documented here.
 
 - Update changelog (#128) by @purvanshjoshi
 
+- Update changelog (#132) by @purvanshjoshi
+
 
 ### Continuous Integration
 
