@@ -190,6 +190,8 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump selenium-java from 4.46.0 to 4.47.0 by @purvanshjoshi
 
+- Bump org.json:json from 20260719 to 20260814 in /backend (#131) by @dependabot[bot]
+
 
 ### Chores
 
@@ -256,6 +258,8 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog by @github-actions[bot]
 
 - Update changelog by @purvanshjoshi
+
+- Update changelog by @github-actions[bot]
 
 - Update changelog by @github-actions[bot]
 
