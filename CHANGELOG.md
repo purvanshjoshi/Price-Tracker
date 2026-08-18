@@ -192,6 +192,8 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump org.json:json from 20260719 to 20260814 in /backend (#131) by @dependabot[bot]
 
+- Bump ch.qos.logback:logback-classic in /backend (#130) by @dependabot[bot]
+
 
 ### Chores
 
@@ -266,6 +268,8 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog by @github-actions[bot]
 
 - Update changelog by @github-actions[bot]
+
+- Update changelog (#128) by @purvanshjoshi
 
 
 ### Continuous Integration
