@@ -194,6 +194,14 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump ch.qos.logback:logback-classic in /backend (#130) by @dependabot[bot]
 
+- Bump actions/setup-java from 5 to 6 by @dependabot[bot]
+
+- Bump org.seleniumhq.selenium:selenium-java in /backend by @dependabot[bot]
+
+- Bump org.xerial:sqlite-jdbc in /backend by @dependabot[bot]
+
+- Bump org.jsoup:jsoup from 1.23.1 to 1.23.2 in /backend by @dependabot[bot]
+
 
 ### Chores
 
@@ -286,6 +294,8 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog (#138) by @purvanshjoshi
 
 - Update changelog (#139) by @purvanshjoshi
+
+- Update changelog by @github-actions[bot]
 
 
 ### Continuous Integration
