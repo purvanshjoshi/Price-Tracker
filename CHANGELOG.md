@@ -202,6 +202,20 @@ All notable changes to **Price Scout** are documented here.
 
 - Bump org.jsoup:jsoup from 1.23.1 to 1.23.2 in /backend by @dependabot[bot]
 
+- Bump com.google.code.gson:gson in /backend by @dependabot[bot]
+
+- Bump org.apache.maven.plugins:maven-surefire-plugin by @dependabot[bot]
+
+- Bump org.xerial:sqlite-jdbc in /backend by @dependabot[bot]
+
+- Bump org.jsoup:jsoup from 1.23.2 to 1.24.1 in /backend by @dependabot[bot]
+
+- Bump amannn/action-semantic-pull-request by @dependabot[bot]
+
+- Bump ch.qos.logback:logback-classic in /backend by @dependabot[bot]
+
+- Bump org.seleniumhq.selenium:selenium-java in /backend by @dependabot[bot]
+
 
 ### Chores
 
@@ -304,6 +318,8 @@ All notable changes to **Price Scout** are documented here.
 - Update changelog (#147) by @purvanshjoshi
 
 - Update changelog (#149) by @purvanshjoshi
+
+- Update changelog (#151) by @purvanshjoshi
 
 
 ### Continuous Integration
